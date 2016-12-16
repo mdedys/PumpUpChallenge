@@ -1,0 +1,41 @@
+@import './info';
+
+.profile {
+  height: 150px;
+  display: flex;
+  overflow: hidden;
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
+}
+
+  .profile-image-container {
+
+    flex-grow: 1;
+    padding-top: 20px;
+  }
+
+    .profile-image-circle {
+      border-radius: 50%;
+      border: 1px solid #ccc;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+
+      img {
+        height: 100px;
+        width: 100px;
+      }
+
+      .loading-spinner {
+        position: relative;
+        margin: 0 auto;
+        margin-top: 50px;
+        font-size: 5px;
+        width: 5px;
+        height: 5px;
+      }
+    }
+
+  .profile-info-container {
+    flex-grow: 3;
+  }

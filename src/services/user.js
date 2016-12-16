@@ -4,12 +4,12 @@ import Request from 'superagent'
 import API from '../constants/api'
 
 export default {
-  loadProfile: loadProfile
+  fetchProfile: fetchProfile
 }
 
-function loadProfile() {
+function fetchProfile() {
 
-  let url = `${API.END_POINT}/classes/Use/318381`
+  let url = `${API.END_POINT}/classes/User/318381`
 
   let payload = {
     '_method': 'GET',
