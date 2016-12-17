@@ -21,7 +21,7 @@ class Grid extends React.Component {
     })
 
     return (
-      <div className = 'photo-grid'>
+      <div className = 'grid'>
         { photos }
       </div>
     )

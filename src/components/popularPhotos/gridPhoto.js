@@ -8,7 +8,7 @@ class Photo extends React.Component {
     const { link } = this.props
 
     return(
-      <div className = 'photo'>
+      <div className = 'grid-photo'>
         <img src = { link } />
       </div>
     )

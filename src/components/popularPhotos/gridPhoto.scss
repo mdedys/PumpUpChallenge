@@ -1,8 +1,15 @@
-.photo {
-  min-height: 50px;
-  min-width: 50px;
-  max-height: 380px;
+.grid-photo {
+  display: inline-block;
+  margin: 0 0 1px 1px;
   max-width: 380px;
+  min-width: 100px;
+  width: calc(100% * (1/3) - 2px);
+}
+
+.grid-photo img {
+  border: none;
+  max-width: 100%;
   height: auto;
-  width: auto;
+  display: block;
+  background: white;
 }
