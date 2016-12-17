@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
 
 import UserActions          from '../../actions/user'
-import TextParser           from '../../utils/textParser'
 import { getParsedBio }     from '../../selectors/user'
 
 import './profile.scss'
@@ -16,13 +15,6 @@ class Profile extends React.Component {
   render() {
 
     const { name, bio, imageLink } = this.props
-
-    //TODO: Rework to not rely on dangerouslySetInnerHTML
-    let parsedBio
-    if ( bio.description ) {
-      parsedBio = TextParser.replaceHashTags( bio.description )
-      parsedBio = TextParser.replaceMentions( parsedBio )
-    }
 
     return (
       <div className = 'profile'>
@@ -39,7 +31,7 @@ class Profile extends React.Component {
           </div>
           <div
             className = 'profile-info-bio'
-            dangerouslySetInnerHTML = { { __html: parsedBio } } />
+            dangerouslySetInnerHTML = { { __html: bio.description } } />
         </div>
 
       </div>
