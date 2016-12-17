@@ -1,0 +1,26 @@
+.slider {
+  list-style-type : none;
+  margin          : 0;
+  padding         : 0;
+  width           : 100%;
+}
+
+  .slider li {
+    display : inline;
+    padding : 0 10px;
+  }
+
+    .slider .slider-button {
+      width         : 20px;
+      height        : 20px;
+      border-radius : 50%;
+      border        : none;
+    }
+
+    .slider .slider-active .slider-button {
+      background-color: #4d4d4d;
+    }
+
+    .slider .slider-inactive .slider-button {
+      background-color: #cccccc;
+    }

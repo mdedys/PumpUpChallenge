@@ -1,11 +1,13 @@
 import { combineReducers } from 'redux'
 
 import user                from './user'
+import feed                from './photoFeed'
 
 function makeRootReducer() {
 
   let rootReducer= combineReducers({
-    user
+    user,
+    feed
   })
 
   return rootReducer
