@@ -11,12 +11,7 @@ function PopularPhotos( state = initialState, action ) {
 
   case Actions.RECEIVE_POPULAR_PHOTOS:
     return {
-      photoList : action.photos.map( photo => {
-        return {
-          id: photo.objectId,
-          link: photo.thumbnail
-        }
-      })
+      photoList : action.photoList
     }
 
   default:

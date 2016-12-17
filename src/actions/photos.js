@@ -7,21 +7,26 @@ export default {
   fetchPopularPhotos: fetchPopularPhotos
 }
 
-function setActiveFeedPhoto( photoId ) {
-  console.info( 'Set feed to photoId: ' + photoId )
+function setActiveFeedPhoto( index ) {
+  console.info( 'Set feed to photoId index: ' + index )
   return {
     type    : Actions.UPDATE_FEED_PHOTO,
-    photoId : photoId
+    newIndex : index
   }
 }
 
 function receivePhotos( response, type ) {
   console.log( 'Received photos of type: ' + type )
-  console.log( response )
-  console.log( type )
+
   return {
     type: type,
-    photos: response.result.posts
+    photoList: response.result.posts.map( photo => {
+      return {
+        id        : photo.objectId,
+        link      : photo.thumbnail,
+        createdAt : photo.createdAt
+      }
+    })
   }
 }
 

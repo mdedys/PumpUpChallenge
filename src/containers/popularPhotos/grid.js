@@ -3,6 +3,7 @@ import React, { PropTypes } from 'react'
 
 import PhotoActions         from '../../actions/photos'
 import GridPhoto            from '../../components/popularPhotos/gridPhoto'
+import LoadingSpinner       from '../../components/loadingSpinner'
 
 import './grid.scss'
 
@@ -15,6 +16,14 @@ class Grid extends React.Component {
   render() {
 
     const { photoList } = this.props
+
+    if ( !photoList || photoList.length === 0 ) {
+      return (
+        <div className = 'grid'>
+          <LoadingSpinner />
+        </div>
+      )
+    }
 
     const photos = photoList.map( photo => {
       return <GridPhoto key = { photo.id } link = { photo.link } />
@@ -34,7 +43,7 @@ Grid.propTypes = {
 }
 
 Grid.defaultProps = {
-  photoList: []
+  photoList: null
 }
 
 const mapStateToProps = function( state ) {

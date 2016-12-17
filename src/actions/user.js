@@ -11,8 +11,7 @@ function recieveProfile( user ) {
     type: Actions.RECEIVE_USER_PROFILE,
     name: user.name,
     bio: user.bio,
-    thumbnailLink: user.profileThumbnail,
-    highResolutionLink: user.profileImage
+    thumbnailLink: user.profileThumbnail
   }
 }
 

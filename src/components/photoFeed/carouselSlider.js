@@ -12,7 +12,7 @@ const CarouselSlider = React.createClass({
 
 
   propTypes: {
-    activeItem: PropTypes.number,
+    activeIndex: PropTypes.number,
     items: PropTypes.array,
     onClick: PropTypes.func
   },
@@ -47,17 +47,17 @@ const CarouselSlider = React.createClass({
 
   render() {
 
-    const { items, activeItem, onClick } = this.props
+    const { items, activeIndex, onClick } = this.props
 
-    const buttons = items.map( item => {
+    const buttons = items.map( ( item, index ) => {
 
-      let className = item === activeItem ? 'slider-active' : 'slider-inactive'
+      let className = index === activeIndex ? 'slider-active' : 'slider-inactive'
 
       return (
-        <li className = { className } key = { item } >
+        <li className = { className } key = { item.id } >
           <button
             className = 'slider-button'
-            onClick = { onClick.bind( null, item ) } />
+            onClick = { onClick.bind( null, index ) } />
         </li>
       )
     })

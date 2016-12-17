@@ -1,12 +1,12 @@
-import { connect }    from 'react-redux'
+import { connect }               from 'react-redux'
 
-import PhotoActions   from '../../actions/photos'
-import Carousel       from '../../components/photoFeed/carousel'
+import PhotoActions              from '../../actions/photos'
+import Carousel                  from '../../components/photoFeed/carousel'
 
 const mapStateToProps = function( state ) {
   return {
-    activePhoto: state.feed.byId[state.feed.activePhotoId],
-    photoList: state.feed.photoList
+    activeIndex : state.feed.activeIndex,
+    photoList   : state.feed.photoList
   }
 }
 
