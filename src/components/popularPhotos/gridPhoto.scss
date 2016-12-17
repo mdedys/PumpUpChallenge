@@ -7,9 +7,16 @@
 }
 
 .grid-photo img {
-  border: none;
-  max-width: 100%;
-  height: auto;
-  display: block;
-  background: white;
+  border     : none;
+  max-width  : 100%;
+  height     : auto;
+  display    : block;
+  background : white;
+
+  animation  : fadein 2s;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
