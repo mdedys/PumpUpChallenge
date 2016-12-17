@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react'
 
 import Slider from './carouselSlider'
 
+import './carousel.scss'
+
 const Carousel = React.createClass({
 
 
