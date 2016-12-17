@@ -3,14 +3,14 @@ import { connect }    from 'react-redux'
 import PhotoActions   from '../../actions/photos'
 import Carousel       from '../../components/photoFeed/carousel'
 
-const mapStateToProps = ( { feed } ) => {
+const mapStateToProps = function( state ) {
   return {
-    activePhoto: feed.byId[feed.active],
-    photoList: feed.photoList
+    activePhoto: state.feed.byId[state.feed.activePhotoId],
+    photoList: state.feed.photoList
   }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = function( dispatch ) {
   return {
     fetchPhotos: () => {
       dispatch( PhotoActions.fetchFeedPhotos() )

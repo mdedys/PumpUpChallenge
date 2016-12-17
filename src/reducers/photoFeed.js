@@ -3,9 +3,9 @@ import Actions from '../constants/actions'
 export default feedPhotos
 
 const initialState = {
-  photoList : [],
-  byId       : {},
-  active     : 0
+  photoList     : [],
+  byId          : {},
+  activePhotoId : null
 }
 
 function feedPhotos( state = initialState, action ) {
@@ -28,17 +28,17 @@ function feedPhotos( state = initialState, action ) {
     })
 
     return {
-      photoList : photoList,
-      byId      : idToPhotoMap,
-      active    : photoList[0]
+      photoList     : photoList,
+      byId          : idToPhotoMap,
+      activePhotoId : photoList[0]
     }
   }
 
   case Actions.UPDATE_FEED_PHOTO: {
     return {
-      photoList : state.photoList,
-      byId      : state.byId,
-      active    : state.byId[action.photoId].id
+      photoList     : state.photoList,
+      byId          : state.byId,
+      activePhotoId : state.byId[action.photoId].id
     }
   }
 

@@ -3,6 +3,7 @@ import { connect }          from 'react-redux'
 
 import UserActions          from '../../actions/user'
 import TextParser           from '../../utils/textParser'
+import { getParsedBio }     from '../../selectors/user'
 
 import './profile.scss'
 
@@ -14,7 +15,7 @@ class Profile extends React.Component {
 
   render() {
 
-    const { name, bio, image } = this.props.user
+    const { name, bio, imageLink } = this.props
 
     //TODO: Rework to not rely on dangerouslySetInnerHTML
     let parsedBio
@@ -28,7 +29,7 @@ class Profile extends React.Component {
 
         <div className = 'profile-image-container'>
           <div className = 'profile-image-circle'>
-            <img className = 'profile-image' src = { image.thumbnail.link } />
+            <img className = 'profile-image' src = { imageLink } />
           </div>
         </div>
 
@@ -47,27 +48,28 @@ class Profile extends React.Component {
 }
 
 Profile.propTypes = {
-  user: PropTypes.shape({
-    name: PropTypes.string,
-    bio: PropTypes.shape({
-      description: PropTypes.string,
-      isExpanded: PropTypes.bool
-    }),
-    image: PropTypes.shape({
-      link: PropTypes.string
-    })
+  name: PropTypes.string,
+  bio: PropTypes.shape({
+    description: PropTypes.string,
+    isExpanded: PropTypes.bool
   }),
+  imageLink: PropTypes.string,
   fetchProfile: PropTypes.func
 }
 
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = function( state ) {
   return {
-    user: state.user
+    name: state.user.name,
+    bio: {
+      description: getParsedBio( state ),
+      isExpanded: state.user.bio.isExpanded
+    },
+    imageLink: state.user.image.link
   }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = function( dispatch ) {
   return {
     fetchProfile: () => {
       dispatch( UserActions.fetchProfile() )

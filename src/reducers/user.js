@@ -1,22 +1,13 @@
 import Actions from '../constants/actions'
 
 const initialState = {
-  name: null,
-  bio: {
-    description: null,
-    isExpanded: false
+  name : null,
+  bio  : {
+    description : null,
+    isExpanded  : false
   },
   image: {
-    thumbnail: {
-      link: null,
-      data: null,
-      isFetching: false,
-    },
-    highResolution: {
-      link: null,
-      data: null,
-      isFetching: false
-    }
+    link: null
   }
 }
 
@@ -31,16 +22,7 @@ function user( state = initialState, action ) {
         isExpanded: false
       },
       image: {
-        thumbnail: {
-          link: action.thumbnailLink,
-          data: null,
-          isFetching: false
-        },
-        highResolution: {
-          link: action.highResolutionLink,
-          data: null,
-          isFetching: false
-        }
+        link: action.thumbnailLink
       }
     }
 

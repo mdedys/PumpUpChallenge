@@ -37,13 +37,13 @@ Grid.defaultProps = {
   photoList: []
 }
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = function( state ) {
   return {
     photoList: state.popularPhotos.photoList
   }
 }
 
-const mapDispatchToProps = ( dispatch ) => {
+const mapDispatchToProps = function( dispatch ) {
   return {
     fetchPhotos: () => {
       dispatch( PhotoActions.fetchPopularPhotos() )
