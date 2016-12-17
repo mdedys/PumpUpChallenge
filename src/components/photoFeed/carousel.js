@@ -40,8 +40,6 @@ const Carousel = React.createClass({
   render() {
 
     const { activePhoto, photoList, setPhoto } = this.props
-    console.log( 'carousel' )
-    console.log( this.props )
 
     if ( !activePhoto ) {
       return null

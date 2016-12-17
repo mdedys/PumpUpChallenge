@@ -47,9 +47,6 @@ const CarouselSlider = React.createClass({
 
   render() {
 
-    console.log( 'slider' )
-    console.log( this.props )
-
     const { items, activeItem, onClick } = this.props
 
     const buttons = items.map( item => {

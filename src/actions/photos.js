@@ -17,6 +17,8 @@ function setActiveFeedPhoto( photoId ) {
 
 function receivePhotos( response, type ) {
   console.log( 'Received photos of type: ' + type )
+  console.log( response )
+  console.log( type )
   return {
     type: type,
     photos: response.result.posts

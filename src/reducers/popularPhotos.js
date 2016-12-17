@@ -14,7 +14,7 @@ function PopularPhotos( state = initialState, action ) {
       photoList : action.photos.map( photo => {
         return {
           id: photo.objectId,
-          link: photo.link
+          link: photo.thumbnail
         }
       })
     }
