@@ -1,5 +1,5 @@
 import { connect }    from 'react-redux'
-import FeedActions    from '../actions/photoFeed'
+import PhotoActions    from '../actions/photos'
 import Carousel       from '../components/photoFeed/carousel'
 
 const mapStateToProps = ( { feed } ) => {
@@ -12,10 +12,10 @@ const mapStateToProps = ( { feed } ) => {
 const mapDispatchToProps = ( dispatch ) => {
   return {
     fetchPhotos: () => {
-      dispatch( FeedActions.fetchPhotos() )
+      dispatch( PhotoActions.fetchFeedPhotos() )
     },
     setPhoto: ( photoId ) => {
-      dispatch( FeedActions.setPhoto( photoId ) )
+      dispatch( PhotoActions.setActiveFeedPhoto( photoId ) )
     }
   }
 }
