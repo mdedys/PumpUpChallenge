@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react'
 
-import Image from '../image'
 import Slider from './carouselSlider'
 
 const Carousel = React.createClass({
@@ -48,7 +47,7 @@ const Carousel = React.createClass({
     return (
       <div className = 'carousel' >
         <div className = 'carousel-image'>
-          <Image src = { activePhoto.link } />
+          <img src = { activePhoto.link } />
         </div>
         <Slider
           activeItem = { activePhoto.id }

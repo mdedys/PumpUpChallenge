@@ -1,10 +1,10 @@
 import React            from 'react'
 
-import UserProfile      from '../containers/userProfile'
-import PhotoFeed        from '../containers/photoFeed'
+import UserProfile      from '../containers/userProfile/profile'
+import PhotoFeed        from '../containers/photoFeed/feed'
 import PopularPhotoGrid from '../containers/popularPhotos/grid'
 
-import '../scss/root.scss'
+import './root.scss'
 
 class Root extends React.Component {
   render() {

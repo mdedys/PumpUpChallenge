@@ -1,5 +1,3 @@
-@import './info';
-
 .profile {
   height: 150px;
   display: flex;
@@ -20,22 +18,20 @@
       width: 100px;
       height: 100px;
       overflow: hidden;
+    }
 
-      img {
-        height: 100px;
-        width: 100px;
-      }
-
-      .loading-spinner {
-        position: relative;
-        margin: 0 auto;
-        margin-top: 50px;
-        font-size: 5px;
-        width: 5px;
-        height: 5px;
-      }
+    .profile-image-circle .profile-image {
+      height: 100px;
+      width: 100px;
     }
 
   .profile-info-container {
     flex-grow: 3;
+    padding: 5px 20px;
   }
+
+    .profile-info-name {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }

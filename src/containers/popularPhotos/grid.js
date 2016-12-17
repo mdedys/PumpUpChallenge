@@ -16,8 +16,6 @@ class Grid extends React.Component {
 
     const { photoList } = this.props
 
-    console.log( photoList )
-
     const photos = photoList.map( photo => {
       return <GridPhoto key = { photo.id } link = { photo.link } />
     })

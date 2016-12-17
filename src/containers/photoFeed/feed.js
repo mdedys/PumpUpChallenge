@@ -1,6 +1,7 @@
 import { connect }    from 'react-redux'
-import PhotoActions    from '../actions/photos'
-import Carousel       from '../components/photoFeed/carousel'
+
+import PhotoActions   from '../../actions/photos'
+import Carousel       from '../../components/photoFeed/carousel'
 
 const mapStateToProps = ( { feed } ) => {
   return {

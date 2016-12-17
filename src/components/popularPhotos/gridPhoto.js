@@ -1,7 +1,5 @@
 import React, { PropTypes } from 'react'
 
-import Image from '../image'
-
 import './gridPhoto.scss'
 
 class Photo extends React.Component {
@@ -11,7 +9,7 @@ class Photo extends React.Component {
 
     return(
       <div className = 'photo'>
-        <Image src = { link } />
+        <img src = { link } />
       </div>
     )
   }
