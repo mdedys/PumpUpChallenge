@@ -1,9 +1,10 @@
-import React, { PropTypes }      from 'react'
-import { connect }               from 'react-redux'
+import React, { PropTypes }  from 'react'
+import { connect }           from 'react-redux'
 
-import PhotoActions              from '../../actions/photos'
-import Carousel                  from '../../components/photoFeed/carousel'
-import LoadingSpinner            from '../../components/loadingSpinner'
+import PhotoActions          from '../../actions/photos'
+import Carousel              from '../../components/photoFeed/carousel'
+import LoadingSpinner        from '../../components/loadingSpinner'
+import { getFeedPhotos }     from '../../selectors/user'
 
 import './feed.scss'
 
@@ -57,10 +58,7 @@ class PhotoFeed extends React.Component {
 
 
 const mapStateToProps = function( state ) {
-  return {
-    photoList   : state.user.feed.photoList,
-    isLoaded    : state.user.feed.isLoaded
-  }
+  return getFeedPhotos( state )
 }
 
 const mapDispatchToProps = function( dispatch ) {

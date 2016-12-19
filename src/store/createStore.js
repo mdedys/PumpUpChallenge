@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux'
 import Thunk                            from 'redux-thunk'
 
-import MakeRootReducer from '../reducers/root'
+import MakeRootReducer                  from '../reducers/root'
 
 function _createStore() {
 

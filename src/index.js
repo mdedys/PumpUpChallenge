@@ -2,8 +2,9 @@ import React        from 'react'
 import ReactDOM     from 'react-dom'
 import { Provider } from 'react-redux'
 
-import CreateStore  from './store/createStore'
 import Root         from './components/root'
+import CreateStore  from './store/createStore'
+
 
 const store = CreateStore()
 

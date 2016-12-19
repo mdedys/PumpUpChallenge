@@ -1,13 +1,14 @@
+import ClassNames           from 'classnames'
 import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
-import ClassNames           from 'classnames'
+
 
 import UserActions          from '../../actions/user'
-import { summarizeBio }     from '../../selectors/user'
+import LoadingSpinner       from '../../components/loadingSpinner'
 import UserName             from '../../components/userProfile/userName'
 import BioSummary           from '../../components/userProfile/bioSummary'
 import ProfileImage         from '../../components/userProfile/profileImage'
-import LoadingSpinner       from '../../components/loadingSpinner'
+import { getUserProfile }   from '../../selectors/user'
 
 import './profile.scss'
 
@@ -111,13 +112,7 @@ class Profile extends React.Component {
 }
 
 const mapStateToProps = function( state ) {
-  return {
-    name             : state.user.profile.name,
-    bio              : state.user.profile.bio,
-    summarizedBio    : summarizeBio( state ),
-    thumbnailLink    : state.user.profile.image.thumbnail,
-    isLoaded         : state.user.profile.isLoaded
-  }
+  return getUserProfile( state )
 }
 
 const mapDispatchToProps = function( dispatch ) {

@@ -1,8 +1,9 @@
-import { connect }          from 'react-redux'
 import React, { PropTypes } from 'react'
+import { connect }          from 'react-redux'
 
 import PhotoActions         from '../../actions/photos'
 import GridPhoto            from '../../components/popularPhotos/gridPhoto'
+import { getPopularPhotos } from '../../selectors/popularPhotos'
 
 import './grid.scss'
 
@@ -56,10 +57,7 @@ class Grid extends React.Component {
 }
 
 const mapStateToProps = function( state ) {
-  return {
-    photoList: state.popularPhotos.photoList,
-    isLoaded: state.popularPhotos.isLoaded
-  }
+  return getPopularPhotos( state )
 }
 
 const mapDispatchToProps = function( dispatch ) {

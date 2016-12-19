@@ -1,11 +1,12 @@
+import nock               from 'nock'
 import configureMockStore from 'redux-mock-store'
 import thunk              from 'redux-thunk'
-import nock               from 'nock'
 import should             from 'should'
 
+import MockServices       from '../utils/mockServices'
 import UserActions        from '../../src/actions/user'
 import Actions            from '../../src/constants/actions'
-import MockServices       from '../utils/mockServices'
+
 
 const mockStore = configureMockStore( [thunk] )
 

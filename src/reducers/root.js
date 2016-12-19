@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux'
 
-import user                from './user'
 import popularPhotos       from './popularPhotos'
+import user                from './user'
+
+export default makeRootReducer
 
 function makeRootReducer() {
 
@@ -13,4 +15,4 @@ function makeRootReducer() {
   return rootReducer
 }
 
-export default makeRootReducer
+

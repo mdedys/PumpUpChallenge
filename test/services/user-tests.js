@@ -1,9 +1,8 @@
 import nock               from 'nock'
 import should             from 'should'
 
-import UserService      from '../../src/services/user'
 import MockServices     from '../utils/mockServices'
-
+import UserService      from '../../src/services/user'
 
 describe( 'UserService', () => {
 

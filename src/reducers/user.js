@@ -1,5 +1,7 @@
 import Actions from '../constants/actions'
 
+export default user
+
 const initialState = {
   profile: {
     name : null,
@@ -46,4 +48,4 @@ function user( state = initialState, action ) {
   }
 }
 
-export default user
+

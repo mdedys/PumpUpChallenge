@@ -1,8 +1,9 @@
 import React            from 'react'
 
-import UserProfile      from '../containers/userProfile/profile'
 import PhotoFeed        from '../containers/photoFeed/feed'
-import PopularPhotos from '../containers/popularPhotos/grid'
+import PopularPhotos    from '../containers/popularPhotos/grid'
+import UserProfile      from '../containers/userProfile/profile'
+
 
 import './root.scss'
 

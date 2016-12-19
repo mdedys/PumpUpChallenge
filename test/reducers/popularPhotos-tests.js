@@ -1,7 +1,7 @@
 import should               from 'should'
 
-import PopularPhotosReducer from '../../src/reducers/popularPhotos'
 import Actions              from '../../src/constants/actions'
+import PopularPhotosReducer from '../../src/reducers/popularPhotos'
 
 describe( 'PopularPhotosReducer', () => {
   it ( 'should return initial state', () => {

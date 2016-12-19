@@ -1,4 +1,5 @@
 import React                from 'react'
+
 import { HASHTAG, MENTION } from '../constants/tags'
 
 export default {

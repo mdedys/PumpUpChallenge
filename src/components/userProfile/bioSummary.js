@@ -1,8 +1,11 @@
 import React, { PropTypes } from 'react'
+
 import TagParser            from '../../utils/tagParser'
 
 import './bioSummary.scss'
-const maxLines  = 3
+
+const MAX_LINES  = 3
+
 class BioSummary extends React.Component {
 
   ////////////////////
@@ -40,7 +43,7 @@ class BioSummary extends React.Component {
     let textLines     = [...this.props.children]
     let linesOfText   = []
 
-    while ( linesFilled <= maxLines ) {
+    while ( linesFilled <= MAX_LINES ) {
       let currentLine = textLines.shift()
 
       if ( currentLine === null ) {
@@ -75,7 +78,7 @@ class BioSummary extends React.Component {
         continue
       }
 
-      let isLastLine = linesFilled === maxLines
+      let isLastLine = linesFilled === MAX_LINES
       let trimObject = this.trimLine( lineText, lineLength, isLastLine )
 
       if ( !isLastLine ) {
