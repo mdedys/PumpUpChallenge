@@ -5,8 +5,8 @@ import Carousel                  from '../../components/photoFeed/carousel'
 
 const mapStateToProps = function( state ) {
   return {
-    activeIndex : state.feed.activeIndex,
-    photoList   : state.feed.photoList
+    photoList   : state.user.feed.photoList,
+    isLoaded    : state.user.feed.isLoaded
   }
 }
 

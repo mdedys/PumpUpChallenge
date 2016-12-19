@@ -2,17 +2,8 @@ import Actions     from '../constants/actions'
 import PhotoService from '../services/photos'
 
 export default {
-  setActiveFeedPhoto: setActiveFeedPhoto,
   fetchFeedPhotos: fetchFeedPhotos,
   fetchPopularPhotos: fetchPopularPhotos
-}
-
-function setActiveFeedPhoto( index ) {
-  console.info( 'Set feed to photoId index: ' + index )
-  return {
-    type    : Actions.UPDATE_FEED_PHOTO,
-    newIndex : index
-  }
 }
 
 function receivePhotos( response, type ) {

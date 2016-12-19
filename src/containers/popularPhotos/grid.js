@@ -3,11 +3,16 @@ import React, { PropTypes } from 'react'
 
 import PhotoActions         from '../../actions/photos'
 import GridPhoto            from '../../components/popularPhotos/gridPhoto'
-import LoadingSpinner       from '../../components/loadingSpinner'
 
 import './grid.scss'
 
 class Grid extends React.Component {
+
+  static propTypes = {
+    photoList   : PropTypes.array,
+    isLoaded    : PropTypes.bool,
+    fetchPhotos : PropTypes.func
+  }
 
   componentDidMount() {
     this.props.fetchPhotos()
@@ -15,14 +20,10 @@ class Grid extends React.Component {
 
   render() {
 
-    const { photoList } = this.props
+    const { photoList, isLoaded } = this.props
 
-    if ( !photoList || photoList.length === 0 ) {
-      return (
-        <div className = 'grid'>
-          <LoadingSpinner />
-        </div>
-      )
+    if ( !isLoaded ) {
+      return null
     }
 
     const photos = photoList.map( photo => {
@@ -37,18 +38,10 @@ class Grid extends React.Component {
   }
 }
 
-Grid.propTypes = {
-  photoList: PropTypes.array,
-  fetchPhotos: PropTypes.func
-}
-
-Grid.defaultProps = {
-  photoList: null
-}
-
 const mapStateToProps = function( state ) {
   return {
-    photoList: state.popularPhotos.photoList
+    photoList: state.popularPhotos.photoList,
+    isLoaded: state.popularPhotos.isLoaded
   }
 }
 

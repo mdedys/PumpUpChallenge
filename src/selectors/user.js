@@ -1,20 +1,14 @@
 import { createSelector } from 'reselect'
 
-import TextParser         from '../utils/textParser'
+const getBio = ( state ) => state.user.profile.bio
 
-const getBioDescription = ( state ) => state.user.bio.description
-
-export const getParsedBio = createSelector(
-  [ getBioDescription ],
+export const summarizeBio = createSelector(
+  [ getBio ],
   function( bio ) {
-
     if ( !bio ) {
-      return null
+      return []
     }
-
-    let parsedBio = TextParser.replaceHashTags( bio )
-    parsedBio = TextParser.replaceMentions( parsedBio )
-    return parsedBio
+    return bio.split( '\n' )
   }
 )
 

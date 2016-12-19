@@ -8,6 +8,12 @@ import { MIN_SWIPE_DISTANCE, SWIPE_THRESHOLD,
 import './carousel.scss'
 
 class Carousel extends React.Component {
+  static propTypes = {
+    activeIndex : PropTypes.number,
+    photoList   : PropTypes.array,
+    isLoaded    : PropTypes.bool,
+    fetchPhotos : PropTypes.func,
+  }
 
   constructor() {
     super()
@@ -16,19 +22,22 @@ class Carousel extends React.Component {
       direction    : null,
       swipeStart   : null,
       touch        : null,
-      initialTouch : null
+      initialTouch : null,
+      activeIndex  : 0
     }
 
     this.onTouchStart = this.onTouchStart.bind( this )
     this.onTouchMove = this.onTouchMove.bind( this )
     this.onTouchEnd = this.onTouchEnd.bind( this )
+    this.setPhoto = this.setPhoto.bind( this )
   }
 
   render() {
 
-    const { activeIndex, photoList, setPhoto } = this.props
+    const { photoList, isLoaded } = this.props
+    console.log( this.props )
 
-    if ( !photoList || photoList.length === 0 ) {
+    if ( !isLoaded ) {
       return (
         <div className = 'carousel' >
           <LoadingSpinner />
@@ -43,18 +52,22 @@ class Carousel extends React.Component {
         onTouchMove  = { this.onTouchMove }
         onTouchEnd   = { this.onTouchEnd } >
         <div className = 'carousel-image'>
-          <img src = { photoList[activeIndex].link } />
+          <img src = { photoList[this.state.activeIndex].link } />
         </div>
         <Slider
-          activeIndex = { activeIndex }
+          activeIndex = { this.state.activeIndex }
           items       = { photoList }
-          onClick     = { setPhoto } />
+          onClick     = { this.setPhoto } />
       </div>
     )
   }
 
+  setPhoto( index ) {
+    this.setState( { activeIndex: index } )
+  }
+
   componentDidMount() {
-    this.props.fetchPhotos()
+   this.props.fetchPhotos()
   }
 
   onTouchStart( evt ) {
@@ -102,12 +115,12 @@ class Carousel extends React.Component {
 
     if ( this._getSwipeLengthX( this.state.initialTouch ) > MIN_SWIPE_DISTANCE ) {
 
-      const { activeIndex, photoList, setPhoto } = this.props
+      const { activeIndex, photoList } = this.props
 
       if ( this.state.direction === SWIPE_LEFT && activeIndex !== photoList.length - 1 ) {
-        setPhoto( activeIndex + 1 )
+        this.setState({ activeIndex: activeIndex + 1 })
       } else if ( this.state.direction === SWIPE_RIGHT && activeIndex !== 0 ) {
-        setPhoto( activeIndex - 1 )
+        this.setState({ activeIndex: activeIndex - 1 })
       }
     }
 
@@ -135,20 +148,6 @@ class Carousel extends React.Component {
       initialTouch : null
     })
   }
-}
-
-Carousel.propTypes = {
-  activeIndex : PropTypes.number,
-  photoList   : PropTypes.array,
-  setPhoto    : PropTypes.func,
-  fetchPhotos : PropTypes.func
-}
-
-Carousel.defaultProps = {
-  activeIndex : null,
-  photoList   : null,
-  setPhoto    : () => {},
-  onSwipe     : () => {}
 }
 
 export default Carousel

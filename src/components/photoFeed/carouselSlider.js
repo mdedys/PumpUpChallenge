@@ -4,13 +4,6 @@ import './carouselSlider.scss'
 
 const CarouselSlider = React.createClass({
 
-
-  ////////////////////
-  // PROPS & STATES //
-  ////////////////////
-
-
-
   propTypes: {
     activeIndex: PropTypes.number,
     items: PropTypes.array,
@@ -26,24 +19,6 @@ const CarouselSlider = React.createClass({
       onClick: () => {}
     }
   },
-
-
-
-  getInitialState() {
-    return {
-
-    }
-  },
-
-
-
-
-
-  ////////////////
-  // RENDERINGS //
-  ////////////////
-
-
 
   render() {
 

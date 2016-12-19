@@ -1,36 +1,23 @@
 .profile {
-  height: 150px;
-  display: flex;
-  overflow: hidden;
-  padding: 5px;
-  border-bottom: 1px solid #ccc;
+  height        : 125px;
+  display       : flex;
+  border-bottom : 1px solid #ccc;
+  overflow      : hidden;
+
+  &.expanded {
+    height: auto
+  }
 }
 
+
   .profile-image-container {
-    flex-grow: 1;
-    padding-top: 20px;
+    padding-top : 10px;
+    width       : 33%;
+    height      : 100%;
   }
-
-    .profile-image-circle {
-      border-radius: 50%;
-      border: 1px solid #ccc;
-      width: 100px;
-      height: 100px;
-      overflow: hidden;
-    }
-
-    .profile-image-circle .profile-image {
-      height: 100px;
-      width: 100px;
-    }
 
   .profile-info-container {
-    flex-grow: 3;
-    padding: 5px 20px;
+    width      : 67%;
+    padding    : 5px 10px 10px 0;
+    overflow   : hidden;
   }
-
-    .profile-info-name {
-      font-size: 24px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }

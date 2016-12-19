@@ -1,0 +1,26 @@
+.bio-summary {
+  box-sizing  : border-box;
+  width       : 100%;
+  font-size   : 1em;
+  font-weight : 400;
+  line-height : 1.2em;
+  height      : 3.6em;
+  max-height  : 3.6em;
+  overflow    : hidden;
+
+  &.expanded {
+    height: auto;
+    max-height: none;
+  }
+}
+
+.tag {
+  color: black;
+  font-weight: bold;
+  text-decoration: none
+}
+
+.read-more {
+  color: blue;
+  cursor: pointer;
+}

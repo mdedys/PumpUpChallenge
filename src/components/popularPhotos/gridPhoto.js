@@ -3,6 +3,11 @@ import React, { PropTypes } from 'react'
 import './gridPhoto.scss'
 
 class Photo extends React.Component {
+
+  static propTypes = {
+    link: PropTypes.string
+  }
+
   render() {
 
     const { link } = this.props
@@ -13,10 +18,6 @@ class Photo extends React.Component {
       </div>
     )
   }
-}
-
-Photo.propTypes = {
-  link: PropTypes.string
 }
 
 export default Photo

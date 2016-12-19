@@ -3,7 +3,8 @@ import Actions from '../constants/actions'
 export default PopularPhotos
 
 const initialState = {
-  photos: []
+  photoList: [],
+  isLoaded: false
 }
 
 function PopularPhotos( state = initialState, action ) {
@@ -11,7 +12,8 @@ function PopularPhotos( state = initialState, action ) {
 
   case Actions.RECEIVE_POPULAR_PHOTOS:
     return {
-      photoList : action.photoList
+      photoList : action.photoList,
+      isLoaded: true
     }
 
   default:

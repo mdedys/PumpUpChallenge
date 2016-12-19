@@ -1,37 +1,87 @@
 import React, { PropTypes } from 'react'
 import { connect }          from 'react-redux'
+import ClassNames           from 'classnames'
 
 import UserActions          from '../../actions/user'
-import { getParsedBio }     from '../../selectors/user'
+import { summarizeBio }     from '../../selectors/user'
+import UserName             from '../../components/userProfile/userName'
+import BioSummary           from '../../components/userProfile/bioSummary'
+import ProfileImage         from '../../components/userProfile/profileImage'
+import LoadingSpinner       from '../../components/loadingSpinner'
 
 import './profile.scss'
 
 class Profile extends React.Component {
 
+  static propTypes = {
+    name          : PropTypes.string,
+    bio           : PropTypes.string,
+    summarizedBio : PropTypes.array,
+    thumbnailLink : PropTypes.string,
+    isLoaded      : PropTypes.bool,
+    fetchProfile  : PropTypes.func
+  }
+
+  constructor() {
+    super()
+
+    this.state = { isExpanded: false }
+
+    this.readMore = this.readMore.bind( this )
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    let didNameChange = nextProps.name !== this.props.name
+    let didBioChange = nextProps.bio !== this.props.bio
+    let didImageChange = nextProps.thumbnailLink !== this.props.thumbnailLink
+
+    let didBioExpand = nextState.isExpanded !== this.state.isExpanded
+
+    return didNameChange || didBioChange || didImageChange || didBioExpand
+  }
+
   componentDidMount() {
     this.props.fetchProfile()
   }
 
+  readMore() {
+    this.setState({ isExpanded: true })
+  }
+
   render() {
 
-    const { name, bio, imageLink } = this.props
+    const { name, summarizedBio, thumbnailLink, isLoaded } = this.props
+
+    console.log( this.props )
+
+    if ( !isLoaded ) {
+      return (
+        <div className = 'profile' >
+          <LoadingSpinner />
+        </div>
+      )
+    }
+
+    let profileClassName = ClassNames( 'profile', {
+      'expanded': this.state.isExpanded
+    })
 
     return (
-      <div className = 'profile'>
+      <div className = { profileClassName } >
 
         <div className = 'profile-image-container'>
-          <div className = 'profile-image-circle'>
-            <img className = 'profile-image' src = { imageLink } />
-          </div>
+          <ProfileImage thumbnailLink = { thumbnailLink } />
         </div>
 
         <div className = 'profile-info-container'>
-          <div className = 'profile-info-name' >
-            { name }
-          </div>
-          <div
-            className = 'profile-info-bio'
-            dangerouslySetInnerHTML = { { __html: bio.description } } />
+            <UserName>
+              {name}
+            </UserName>
+            <BioSummary
+              isExpanded={this.state.isExpanded}
+              onReadMore={this.readMore} >
+                {summarizedBio}
+            </BioSummary>
         </div>
 
       </div>
@@ -39,25 +89,13 @@ class Profile extends React.Component {
   }
 }
 
-Profile.propTypes = {
-  name: PropTypes.string,
-  bio: PropTypes.shape({
-    description: PropTypes.string,
-    isExpanded: PropTypes.bool
-  }),
-  imageLink: PropTypes.string,
-  fetchProfile: PropTypes.func
-}
-
-
 const mapStateToProps = function( state ) {
   return {
-    name: state.user.name,
-    bio: {
-      description: getParsedBio( state ),
-      isExpanded: state.user.bio.isExpanded
-    },
-    imageLink: state.user.image.link
+    name             : state.user.profile.name,
+    bio              : state.user.profile.bio,
+    summarizedBio    : summarizeBio( state ),
+    thumbnailLink    : state.user.profile.image.thumbnail,
+    isLoaded         : state.user.profile.isLoaded
   }
 }
 

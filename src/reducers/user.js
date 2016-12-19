@@ -1,13 +1,17 @@
 import Actions from '../constants/actions'
 
 const initialState = {
-  name : null,
-  bio  : {
-    description : null,
-    isExpanded  : false
+  profile: {
+    name : null,
+    bio: null,
+    image: {
+      thumbnail: null
+    },
+    isLoaded: false
   },
-  image: {
-    link: null
+  feed: {
+    photoList: [],
+    isLoaded: false
   }
 }
 
@@ -16,15 +20,26 @@ function user( state = initialState, action ) {
 
   case Actions.RECEIVE_USER_PROFILE:
     return {
-      name: action.name,
-      bio: {
-        description: action.bio,
-        isExpanded: false
-      },
-      image: {
-        link: action.thumbnailLink
+      ...state,
+      profile: {
+        name: action.name,
+        bio: action.bio,
+        image: {
+          thumbnail: action.thumbnailLink
+        },
+        isLoaded: true
       }
     }
+
+  case Actions.RECEIVE_FEED_PHOTOS:
+    return {
+      ...state,
+      feed: {
+        photoList: action.photoList,
+        isLoaded: true
+      }
+    }
+
 
   default:
     return state
