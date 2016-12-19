@@ -14,7 +14,7 @@ class BioSummary extends React.Component {
   constructor() {
     super()
 
-    this.state = { parentWidth: null }
+    this.state = { summarizerWidth: null }
 
     this.resize = this.resize.bind( this )
     this.readMore = this.readMore.bind( this )
@@ -26,7 +26,7 @@ class BioSummary extends React.Component {
 
     window.addEventListener( 'resize', this.resize )
 
-    setTimeout( this.resize, 100 )
+    setTimeout( this.resize(), 200 )
   }
 
   componentWillUnmount() {
@@ -34,7 +34,7 @@ class BioSummary extends React.Component {
   }
 
   resize() {
-    console.log( 'here' )
+
     if ( this.props.isExpanded ) {
       return
     }
@@ -52,8 +52,9 @@ class BioSummary extends React.Component {
 
     this.canvas.font = font
 
-
-    this.setState({ parentWidth: summarizer.getBoundingClientRect().width })
+    this.setState(
+      { summarizerWidth: summarizer.getBoundingClientRect().width }
+    )
   }
 
   readMore() {
@@ -90,7 +91,6 @@ class BioSummary extends React.Component {
       let shouldAppendToLine = linesFilled === linesOfText.length
 
       if ( shouldAppendToLine ) {
-
         existingLineText = linesOfText[linesFilled - 1]
         lineText = existingLineText + currentLine
       }
@@ -99,9 +99,9 @@ class BioSummary extends React.Component {
       }
 
       lineLength = this.measureText( lineText )
-      let isTextTooLong = lineLength > this.state.parentWidth
+      let isTextTooLong = lineLength > this.state.summarizerWidth
 
-      if ( lineLength < this.state.parentWidth && shouldAppendToLine) {
+      if ( lineLength < this.state.summarizerWidth && shouldAppendToLine) {
         linesOfText[linesFilled - 1] = lineText
         continue
       }
@@ -138,7 +138,7 @@ class BioSummary extends React.Component {
 
     let words = lineText.split( ' ' )
 
-    while ( curLineLength > this.state.parentWidth ) {
+    while ( curLineLength > this.state.summarizerWidth ) {
       let lastWord = words.pop()
       leftOverWords.push( lastWord )
       newLine = words.join( ' ' )
@@ -172,7 +172,7 @@ class BioSummary extends React.Component {
 
     const { children } = this.props
 
-    if ( this.state.parentWidth && !this.props.isExpanded ) {
+    if ( this.state.summarizerWidth && !this.props.isExpanded ) {
 
       return (
         <div className = 'bio-summary' ref = 'summarizer'>

@@ -52,8 +52,6 @@ class Profile extends React.Component {
 
     const { name, summarizedBio, thumbnailLink, isLoaded } = this.props
 
-    console.log( this.props )
-
     if ( !isLoaded ) {
       return (
         <div className = 'profile' >

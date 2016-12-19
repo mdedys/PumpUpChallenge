@@ -1,13 +1,21 @@
 .profile-image-outer {
   border-radius : 50%;
   border        : 1px solid #ccc;
-  width         : 100px;
-  height        : 100px;
+  min-height : 50px;
+  min-width  : 50px;
+  max-height : 100px;
+  max-width  : 100px;
+  height     : auto;
+  width      : auto;
   overflow      : hidden;
   margin        : 0 auto;
 }
 
   .profile-image-inner {
-    height : 100px;
-    width  : 100px;
+    min-height : 50px;
+    min-width  : 50px;
+    max-height : 100px;
+    max-width  : 100px;
+    height     : auto;
+    width      : auto;
   }
