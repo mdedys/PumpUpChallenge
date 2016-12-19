@@ -5,8 +5,7 @@ import should             from 'should'
 
 import UserActions        from '../../src/actions/user'
 import Actions            from '../../src/constants/actions'
-import Api                from '../../src/constants/api'
-import ApiHelpers         from '../../src/services/helpers/api'
+import MockServices       from '../utils/mockServices'
 
 const mockStore = configureMockStore( [thunk] )
 
@@ -22,21 +21,16 @@ describe( 'UserActions', () => {
 
   describe( 'UserActions.fetchProfile', () => {
 
-
-    beforeEach( () => {
-
-      nock( ApiHelpers.createUrl( Api.endpoints.userProfile, '318381' ) )
-        .post( '', ApiHelpers.createPayload( { '_method': 'GET' } ) )
-        .reply( 200, expectedUser )
-    })
-
-
     afterEach( () => {
       nock.cleanAll()
     })
 
 
     it( 'should receive user profile', () => {
+
+      MockServices
+        .mockFetchProfile()
+        .reply( 200, expectedUser )
 
       const store = mockStore( {} )
 

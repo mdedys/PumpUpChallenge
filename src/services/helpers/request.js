@@ -13,7 +13,6 @@ function post( url, payload ) {
       .end( ( err, res ) => {
 
         if ( err ) {
-          console.warn( err )
           reject( err || {} )
           return
         }

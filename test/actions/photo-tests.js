@@ -5,8 +5,7 @@ import should             from 'should'
 
 import PhotoActions       from '../../src/actions/photos'
 import Actions            from '../../src/constants/actions'
-import Api                from '../../src/constants/api'
-import ApiHelpers         from '../../src/services/helpers/api'
+import MockServices       from '../utils/mockServices'
 
 const mockStore = configureMockStore( [thunk] )
 
@@ -50,13 +49,8 @@ describe( 'PhotoActions', () => {
       const store = mockStore( {} )
       const expectedObjectId = photoResponse.result.posts[0].objectId
 
-      nock( ApiHelpers.createUrl( Api.endpoints.feedPhotos ) )
-        .post( '', ApiHelpers.createPayload({
-          'isThumbnailsOnly' : true,
-          'limit'            : 5,
-          'userId'           : 2707798,
-          '_method'          : 'POST',
-        }))
+       MockServices
+        .mockFetchFeedPhotos()
         .reply( 200, photoResponse )
 
       expectedActions.type = Actions.RECEIVE_FEED_PHOTOS
@@ -81,12 +75,8 @@ describe( 'PhotoActions', () => {
       const store = mockStore( {} )
       const expectedObjectId = photoResponse.result.posts[0].objectId
 
-      nock( ApiHelpers.createUrl( Api.endpoints.popularPhotos ) )
-        .post( '', ApiHelpers.createPayload({
-          'isThumbnailsOnly' : true,
-          'limit'            : 18,
-          '_method'          : 'POST',
-        }))
+      MockServices
+        .mockFetchPopularPhotos()
         .reply( 200, photoResponse )
 
       expectedActions.type = Actions.RECEIVE_POPULAR_PHOTOS
