@@ -25,7 +25,7 @@ function fetchPopularPhotos() {
 
   let payload = ApiHelpers.createPayload({
     'isThumbnailsOnly' : true,
-    'limit'            : 25,
+    'limit'            : 18,
     '_method'          : 'POST',
   })
 
