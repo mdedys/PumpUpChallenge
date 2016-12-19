@@ -12,6 +12,12 @@ class Photo extends React.Component {
     link: PropTypes.string
   }
 
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
+
   render() {
 
     const { link } = this.props

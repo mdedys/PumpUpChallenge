@@ -62,9 +62,9 @@ class BioSummary extends React.Component {
       }
 
       lineLength = this.measureText( lineText )
-      let isTextTooLong = lineLength > this.state.summarizerWidth
+      let isTextTooLong = lineLength >= this.state.summarizerWidth
 
-      if ( lineLength < this.state.summarizerWidth && shouldAppendToLine) {
+      if ( !isTextTooLong && shouldAppendToLine) {
         linesOfText[linesFilled - 1] = lineText
         continue
       }
@@ -95,13 +95,14 @@ class BioSummary extends React.Component {
   }
 
   trimLine( lineText, lineLength, isLastLine ) {
+
     let newLine       = ''
     let leftOverWords = []
     let curLineLength = lineLength
 
     let words = lineText.split( ' ' )
 
-    while ( curLineLength > this.state.summarizerWidth ) {
+    while ( curLineLength >= this.state.summarizerWidth ) {
       let lastWord = words.pop()
       leftOverWords.push( lastWord )
       newLine = words.join( ' ' )
@@ -163,9 +164,21 @@ class BioSummary extends React.Component {
     let canvas = document.createElement( 'canvas' )
     this.canvas = canvas.getContext( '2d' )
 
+
+    let style = window.getComputedStyle( this.refs.summarizer )
+
+    let font = [
+      style['font-weight'],
+      style['font-style'],
+      style['font-size'],
+      style['font-family']
+    ].join(' ')
+
+    this.canvas.font = font
+
     window.addEventListener( 'resize', this.resize )
 
-    setTimeout( this.resize(), 200 )
+    this.resize()
   }
 
   componentWillUnmount() {
@@ -186,19 +199,16 @@ class BioSummary extends React.Component {
 
     let summarizer = this.refs.summarizer
 
-    let style = window.getComputedStyle( summarizer )
-
-    let font = [
-      style['font-weight'],
-      style['font-style'],
-      style['font-size'],
-      style['font-family']
-    ].join(' ')
-
-    this.canvas.font = font
+    // Offset is needed for initial load where
+    // width of the container is incorrect in some
+    // browsers
+    let offset = 0
+    if ( !this.state.summarizerWidth ) {
+      offset = 50
+    }
 
     this.setState(
-      { summarizerWidth: summarizer.getBoundingClientRect().width }
+      { summarizerWidth: summarizer.getBoundingClientRect().width - offset }
     )
   }
 
