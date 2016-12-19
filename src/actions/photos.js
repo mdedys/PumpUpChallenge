@@ -1,5 +1,6 @@
-import Actions     from '../constants/actions'
+import Actions      from '../constants/actions'
 import PhotoService from '../services/photos'
+import Logger       from'../utils/logger'
 
 export default {
   fetchFeedPhotos: fetchFeedPhotos,
@@ -7,7 +8,7 @@ export default {
 }
 
 function receivePhotos( response, type ) {
-  console.log( 'Received photos of type: ' + type )
+  Logger.log( 'Received photos of type: ' + type )
 
   return {
     type: type,
@@ -22,7 +23,8 @@ function receivePhotos( response, type ) {
 }
 
 function fetchFeedPhotos() {
-  console.log( 'Fetching feed photos.' )
+  Logger.log( 'Fetching feed photos.' )
+
   return dispatch => {
     return PhotoService
       .fetchFeedPhotos()
@@ -30,11 +32,15 @@ function fetchFeedPhotos() {
           receivePhotos( response, Actions.RECEIVE_FEED_PHOTOS )
         )
       )
+      .catch( error => {
+        Logger.warn( error )
+      })
   }
 }
 
 function fetchPopularPhotos() {
-  console.log( 'Fetching popular photos.' )
+  Logger.log( 'Fetching popular photos.' )
+
   return dispatch => {
     return PhotoService
       .fetchPopularPhotos()
@@ -42,6 +48,9 @@ function fetchPopularPhotos() {
           receivePhotos( response, Actions.RECEIVE_POPULAR_PHOTOS )
         )
       )
+      .catch( error => {
+        Logger.warn( error )
+      })
   }
 }
 
