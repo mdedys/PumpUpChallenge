@@ -1,23 +1,26 @@
 .profile {
   height        : 125px;
+
   display       : flex;
   border-bottom : 1px solid #ccc;
   overflow      : hidden;
 
   &.expanded {
-    height: auto
+    height : auto
   }
 }
 
 
   .profile-image-container {
-    padding-top : 10px;
     width       : 33%;
     height      : 100%;
+
+    padding-top : 10px;
   }
 
   .profile-info-container {
     width      : 67%;
+
     padding    : 15px 10px 10px 0;
     overflow   : hidden;
   }

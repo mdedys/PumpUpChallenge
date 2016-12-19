@@ -1,12 +1,14 @@
 .loading-spinner {
-  color: #cccccc;
-  font-size: 10px;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  text-indent: -9999em;
-  animation: load4 1.3s infinite linear;
-  transform: translateZ(0);
+  width         : 5px;
+  height        : 5px;
+
+  border-radius : 50%;
+  color         : #cccccc;
+  font-size     : 10px;
+  text-indent   : -9999em;
+
+  animation     : load4 1.3s infinite linear;
+  transform     : translateZ(0);
 }
 
 @keyframes load4 {

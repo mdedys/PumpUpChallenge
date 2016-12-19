@@ -2,23 +2,12 @@ import React, { PropTypes } from 'react'
 
 import './carouselSlider.scss'
 
-const CarouselSlider = React.createClass({
-
-  propTypes: {
+class CarouselSlider extends React.Component {
+  static propTypes = {
     activeIndex: PropTypes.number,
     items: PropTypes.array,
     onClick: PropTypes.func
-  },
-
-
-
-  getDefaultProps() {
-    return {
-      activeIndex: 0,
-      items: [],
-      onClick: () => {}
-    }
-  },
+  }
 
   render() {
 
@@ -43,6 +32,6 @@ const CarouselSlider = React.createClass({
       </ul>
     )
   }
-})
+}
 
 export default CarouselSlider

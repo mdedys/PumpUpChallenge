@@ -1,17 +1,19 @@
 .grid-photo {
-  display: inline-block;
-  margin: 0 0 1px 1px;
-  max-width: 380px;
-  min-width: 100px;
-  width: calc(100% * (1/3) - 2px);
+  max-width : 380px;
+  min-width : 100px;
+  width     : calc(100% * (1/3) - 2px);
+
+  display   : inline-block;
+  margin    : 0 0 1px 1px;
 }
 
 .grid-photo img {
-  border     : none;
   max-width  : 100%;
   height     : auto;
+
   display    : block;
   background : white;
+  border     : none;
 
   animation  : fadein 2s;
 }
