@@ -16,7 +16,7 @@ function assertPhotos( receivedAction, actionType, expectedObjectId ) {
   receivedAction.photoList[0].id.should.equal( expectedObjectId )
 }
 
-describe( 'user actions', () => {
+describe( 'PhotoActions', () => {
 
   const photoResponse = {
     result: {
@@ -43,59 +43,65 @@ describe( 'user actions', () => {
     nock.cleanAll()
   })
 
-  it( 'should receive user feed photos', () => {
+  describe( 'PhotoActions.fetchFeedPhotos', () => {
 
-    const store = mockStore( {} )
-    const expectedObjectId = photoResponse.result.posts[0].objectId
+    it( 'should receive user feed photos', () => {
 
-    nock( ApiHelpers.createUrl( Api.endpoints.feedPhotos ) )
-      .post( '', ApiHelpers.createPayload({
-        'isThumbnailsOnly' : true,
-        'limit'            : 5,
-        'userId'           : 2707798,
-        '_method'          : 'POST',
-      }))
-      .reply( 200, photoResponse )
+      const store = mockStore( {} )
+      const expectedObjectId = photoResponse.result.posts[0].objectId
 
-    expectedActions.type = Actions.RECEIVE_FEED_PHOTOS
+      nock( ApiHelpers.createUrl( Api.endpoints.feedPhotos ) )
+        .post( '', ApiHelpers.createPayload({
+          'isThumbnailsOnly' : true,
+          'limit'            : 5,
+          'userId'           : 2707798,
+          '_method'          : 'POST',
+        }))
+        .reply( 200, photoResponse )
 
-    return store.dispatch( PhotoActions.fetchFeedPhotos() )
-      .then( () => {
+      expectedActions.type = Actions.RECEIVE_FEED_PHOTOS
 
-        assertPhotos(
-          store.getActions()[0],
-          expectedActions.type,
-          expectedObjectId
-        )
+      return store.dispatch( PhotoActions.fetchFeedPhotos() )
+        .then( () => {
 
-      })
+          assertPhotos(
+            store.getActions()[0],
+            expectedActions.type,
+            expectedObjectId
+          )
+
+        })
+    })
   })
 
-  it( 'should receive popular photos', () => {
+  describe( 'PhotoActions.fetchFeedPhotos', () => {
 
-    const store = mockStore( {} )
-    const expectedObjectId = photoResponse.result.posts[0].objectId
+    it( 'should receive popular photos', () => {
 
-    nock( ApiHelpers.createUrl( Api.endpoints.popularPhotos ) )
-      .post( '', ApiHelpers.createPayload({
-        'isThumbnailsOnly' : true,
-        'limit'            : 18,
-        '_method'          : 'POST',
-      }))
-      .reply( 200, photoResponse )
+      const store = mockStore( {} )
+      const expectedObjectId = photoResponse.result.posts[0].objectId
 
-    expectedActions.type = Actions.RECEIVE_POPULAR_PHOTOS
+      nock( ApiHelpers.createUrl( Api.endpoints.popularPhotos ) )
+        .post( '', ApiHelpers.createPayload({
+          'isThumbnailsOnly' : true,
+          'limit'            : 18,
+          '_method'          : 'POST',
+        }))
+        .reply( 200, photoResponse )
 
-    return store.dispatch( PhotoActions.fetchPopularPhotos() )
-      .then( () => {
+      expectedActions.type = Actions.RECEIVE_POPULAR_PHOTOS
 
-        assertPhotos(
-          store.getActions()[0],
-          expectedActions.type,
-          expectedObjectId
-        )
+      return store.dispatch( PhotoActions.fetchPopularPhotos() )
+        .then( () => {
 
-      })
+          assertPhotos(
+            store.getActions()[0],
+            expectedActions.type,
+            expectedObjectId
+          )
+
+        })
+    })
   })
 })
 
