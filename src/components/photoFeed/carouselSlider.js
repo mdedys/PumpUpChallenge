@@ -3,11 +3,22 @@ import React, { PropTypes } from 'react'
 import './carouselSlider.scss'
 
 class CarouselSlider extends React.Component {
+
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     activeIndex: PropTypes.number,
     items: PropTypes.array,
     onClick: PropTypes.func
   }
+
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 

@@ -8,6 +8,10 @@ import './carousel.scss'
 
 class Carousel extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     items   : PropTypes.array,
   }
@@ -28,6 +32,12 @@ class Carousel extends React.Component {
     this.onTouchEnd = this.onTouchEnd.bind( this )
     this.setPhoto = this.setPhoto.bind( this )
   }
+
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 
@@ -50,9 +60,16 @@ class Carousel extends React.Component {
     )
   }
 
+
+
+  ////////////////////
+  // EVENT HANDLERS //
+  ////////////////////
+
   setPhoto( index ) {
     this.setState( { activeIndex: index } )
   }
+
 
   onTouchStart( evt ) {
     if ( evt.touches.length !== 1 ) {
@@ -74,12 +91,12 @@ class Carousel extends React.Component {
     let touch = evt.touches[0]
     let direction = this.state.direction
 
-    let swipeLengthX = this._getSwipeLengthX( touch )
+    let swipeLengthX = this.getSwipeLengthX( touch )
     if ( swipeLengthX > SWIPE_THRESHOLD ) {
-      direction = this._getSwipeDirection( touch )
+      direction = this.getSwipeDirection( touch )
     }
 
-    let directionIsUnchanged = this._isSwipeDirectionUnchanged( direction )
+    let directionIsUnchanged = this.isSwipeDirectionUnchanged( direction )
 
     if ( directionIsUnchanged ) {
       this.setState({
@@ -89,7 +106,7 @@ class Carousel extends React.Component {
       return
     }
 
-    this._resetSwipe()
+    this.resetSwipe()
   }
 
   onTouchEnd( evt ) {
@@ -97,7 +114,7 @@ class Carousel extends React.Component {
       return
     }
 
-    if ( this._getSwipeLengthX( this.state.initialTouch ) > MIN_SWIPE_DISTANCE ) {
+    if ( this.getSwipeLengthX( this.state.initialTouch ) > MIN_SWIPE_DISTANCE ) {
 
       const { items } = this.props
       const { activeIndex } = this.state
@@ -109,23 +126,29 @@ class Carousel extends React.Component {
       }
     }
 
-    this._resetSwipe()
+    this.resetSwipe()
   }
 
-  _getSwipeLengthX( touch ) {
+
+
+  ////////////////////
+  // HELPER METHODS //
+  ////////////////////
+
+  getSwipeLengthX( touch ) {
     return Math.abs( touch.pageX - this.state.touch.pageX )
   }
 
-  _getSwipeDirection( touch ) {
+  getSwipeDirection( touch ) {
     return touch.pageX < this.state.touch.pageX ? 'Left' : 'Right'
   }
 
-  _isSwipeDirectionUnchanged( direction ) {
+  isSwipeDirectionUnchanged( direction ) {
     return !this.state.direction ||
       this.state.direction === direction
   }
 
-  _resetSwipe() {
+  resetSwipe() {
     this.setState({
       direction    : null,
       swipeStart   : null,

@@ -9,15 +9,21 @@ import './feed.scss'
 
 class PhotoFeed extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     photoList   : PropTypes.array,
     isLoaded    : PropTypes.bool,
     fetchPhotos : PropTypes.func
   }
 
-  componentDidMount() {
-    this.props.fetchPhotos()
-  }
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 
@@ -36,6 +42,16 @@ class PhotoFeed extends React.Component {
         <Carousel items = { photoList } />
       </div>
     )
+  }
+
+
+
+  /////////////////////
+  // LIFECYCLE HOOKS //
+  /////////////////////
+
+  componentDidMount() {
+    this.props.fetchPhotos()
   }
 }
 

@@ -3,9 +3,20 @@ import React, { PropTypes } from 'react'
 import './userName.scss'
 
 class UserName extends React.Component {
+
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     children: PropTypes.string
   }
+
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
     return (

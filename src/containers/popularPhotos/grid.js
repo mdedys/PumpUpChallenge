@@ -8,15 +8,21 @@ import './grid.scss'
 
 class Grid extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     photoList   : PropTypes.array,
     isLoaded    : PropTypes.bool,
     fetchPhotos : PropTypes.func
   }
 
-  componentDidMount() {
-    this.props.fetchPhotos()
-  }
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 
@@ -36,6 +42,17 @@ class Grid extends React.Component {
       </div>
     )
   }
+
+
+
+  /////////////////////
+  // LIFECYCLE HOOKS //
+  /////////////////////
+
+  componentDidMount() {
+    this.props.fetchPhotos()
+  }
+
 }
 
 const mapStateToProps = function( state ) {

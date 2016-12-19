@@ -4,6 +4,10 @@ import './gridPhoto.scss'
 
 class Photo extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     link: PropTypes.string
   }

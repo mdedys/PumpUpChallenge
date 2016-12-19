@@ -5,6 +5,10 @@ import './bioSummary.scss'
 const maxLines  = 3
 class BioSummary extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     children   : PropTypes.array,
     isExpanded : PropTypes.bool,
@@ -20,52 +24,11 @@ class BioSummary extends React.Component {
     this.readMore = this.readMore.bind( this )
   }
 
-  componentDidMount() {
-    let canvas = document.createElement( 'canvas' )
-    this.canvas = canvas.getContext( '2d' )
 
-    window.addEventListener( 'resize', this.resize )
 
-    setTimeout( this.resize(), 200 )
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener( 'resize', this.resize )
-  }
-
-  resize() {
-
-    if ( this.props.isExpanded ) {
-      return
-    }
-
-    let summarizer = this.refs.summarizer
-
-    let style = window.getComputedStyle( summarizer )
-
-    let font = [
-      style['font-weight'],
-      style['font-style'],
-      style['font-size'],
-      style['font-family']
-    ].join(' ')
-
-    this.canvas.font = font
-
-    this.setState(
-      { summarizerWidth: summarizer.getBoundingClientRect().width }
-    )
-  }
-
-  readMore() {
-    if ( this.props.onReadMore ) {
-      this.props.onReadMore()
-    }
-  }
-
-  measureText( text ) {
-    return this.canvas.measureText( text ).width
-  }
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   renderText() {
 
@@ -189,6 +152,66 @@ class BioSummary extends React.Component {
       </div>
     )
   }
+
+
+
+  /////////////////////
+  // LIFECYCLE HOOKS //
+  /////////////////////
+
+  componentDidMount() {
+    let canvas = document.createElement( 'canvas' )
+    this.canvas = canvas.getContext( '2d' )
+
+    window.addEventListener( 'resize', this.resize )
+
+    setTimeout( this.resize(), 200 )
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener( 'resize', this.resize )
+  }
+
+
+
+  ////////////////////
+  // HELPER METHODS //
+  ////////////////////
+
+  resize() {
+
+    if ( this.props.isExpanded ) {
+      return
+    }
+
+    let summarizer = this.refs.summarizer
+
+    let style = window.getComputedStyle( summarizer )
+
+    let font = [
+      style['font-weight'],
+      style['font-style'],
+      style['font-size'],
+      style['font-family']
+    ].join(' ')
+
+    this.canvas.font = font
+
+    this.setState(
+      { summarizerWidth: summarizer.getBoundingClientRect().width }
+    )
+  }
+
+  readMore() {
+    if ( this.props.onReadMore ) {
+      this.props.onReadMore()
+    }
+  }
+
+  measureText( text ) {
+    return this.canvas.measureText( text ).width
+  }
+
 }
 
 export default BioSummary

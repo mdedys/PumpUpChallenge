@@ -7,6 +7,11 @@ import PopularPhotos from '../containers/popularPhotos/grid'
 import './root.scss'
 
 class Root extends React.Component {
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
+
   render() {
     return (
       <div className = 'root' >

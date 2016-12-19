@@ -13,6 +13,10 @@ import './profile.scss'
 
 class Profile extends React.Component {
 
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     name          : PropTypes.string,
     bio           : PropTypes.string,
@@ -30,23 +34,11 @@ class Profile extends React.Component {
     this.readMore = this.readMore.bind( this )
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    let didNameChange = nextProps.name !== this.props.name
-    let didBioChange = nextProps.bio !== this.props.bio
-    let didImageChange = nextProps.thumbnailLink !== this.props.thumbnailLink
 
-    let didBioExpand = nextState.isExpanded !== this.state.isExpanded
 
-    return didNameChange || didBioChange || didImageChange || didBioExpand
-  }
-
-  componentDidMount() {
-    this.props.fetchProfile()
-  }
-
-  readMore() {
-    this.setState({ isExpanded: true })
-  }
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 
@@ -85,6 +77,37 @@ class Profile extends React.Component {
       </div>
     )
   }
+
+
+
+  /////////////////////
+  // LIFECYCLE HOOKS //
+  /////////////////////
+
+  shouldComponentUpdate(nextProps, nextState) {
+    let didNameChange = nextProps.name !== this.props.name
+    let didBioChange = nextProps.bio !== this.props.bio
+    let didImageChange = nextProps.thumbnailLink !== this.props.thumbnailLink
+
+    let didBioExpand = nextState.isExpanded !== this.state.isExpanded
+
+    return didNameChange || didBioChange || didImageChange || didBioExpand
+  }
+
+  componentDidMount() {
+    this.props.fetchProfile()
+  }
+
+
+
+  ////////////////////
+  // EVENT HANDLERS //
+  ////////////////////
+
+  readMore() {
+    this.setState({ isExpanded: true })
+  }
+
 }
 
 const mapStateToProps = function( state ) {

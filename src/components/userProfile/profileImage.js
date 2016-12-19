@@ -3,9 +3,20 @@ import React, { PropTypes } from 'react'
 import './profileImage.scss'
 
 class ProfileImage extends React.Component {
+
+  ////////////////////
+  // PROPS & STATES //
+  ////////////////////
+
   static propTypes = {
     thumbnailLink: PropTypes.string
   }
+
+
+
+  ////////////////
+  // RENDERINGS //
+  ////////////////
 
   render() {
 
