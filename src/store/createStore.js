@@ -3,6 +3,14 @@ import Thunk                            from 'redux-thunk'
 
 import MakeRootReducer                  from '../reducers/root'
 
+export default _createStore
+
+
+/**
+ * Create the store with applicable middleware for the application
+ * 
+ * @return {Object} The created store
+ */
 function _createStore() {
 
   let store = createStore(
@@ -12,5 +20,3 @@ function _createStore() {
 
   return store
 }
-
-export default _createStore

@@ -8,6 +8,8 @@ class CarouselSlider extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     activeIndex: PropTypes.number,
     items: PropTypes.array,
@@ -19,6 +21,8 @@ class CarouselSlider extends React.Component {
   ////////////////
   // RENDERINGS //
   ////////////////
+
+
 
   render() {
 

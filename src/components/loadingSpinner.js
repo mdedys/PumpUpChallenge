@@ -8,6 +8,8 @@ class LoadingSpinner extends React.Component {
   // RENDERINGS //
   ////////////////
 
+
+
   render() {
     return <div className = 'loading-spinner' />
   }

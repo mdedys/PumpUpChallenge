@@ -6,6 +6,14 @@ export default {
   convertTags: convertTags
 }
 
+
+/**
+ * Creates the url and anchor element for the given hash tag or mention
+ *
+ * @param  {String} A hashtag or mention
+ *
+ * @return {Object} The anchor element for the converted tag
+ */
 function createLinkFromTag( tag ) {
 
   let url
@@ -23,6 +31,14 @@ function createLinkFromTag( tag ) {
   )
 }
 
+
+/**
+ * Explains how to write a short block comment.
+ *
+ * @param  {String} A line of text that may contain a hashtag or mention
+ *
+ * @return {Object[]} An array of react nodes which contain the text and converted tagss 
+ */
 function convertTags(text) {
 
   if ( text === null ) {

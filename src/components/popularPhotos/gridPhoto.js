@@ -8,6 +8,8 @@ class Photo extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     link: PropTypes.string
   }
@@ -17,6 +19,8 @@ class Photo extends React.Component {
   ////////////////
   // RENDERINGS //
   ////////////////
+
+
 
   render() {
 

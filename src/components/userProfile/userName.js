@@ -8,6 +8,8 @@ class UserName extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     children: PropTypes.string
   }
@@ -17,6 +19,8 @@ class UserName extends React.Component {
   ////////////////
   // RENDERINGS //
   ////////////////
+
+
 
   render() {
     return (
