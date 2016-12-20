@@ -47,6 +47,15 @@ class Carousel extends React.Component {
 
     const { items } = this.props
 
+    const images = items.map( ( item, index ) => {
+      let style = index === this.state.activeIndex ? {} : { display: 'none' }
+      return (
+        <div className = 'crousel-image-container' style = { style } >
+          <img src = { item.link } />
+        </div>
+      )
+    })
+
     return (
       <div
         className    = 'carousel'
@@ -54,7 +63,7 @@ class Carousel extends React.Component {
         onTouchMove  = { this.onTouchMove }
         onTouchEnd   = { this.onTouchEnd } >
         <div className = 'carousel-image'>
-          <img src = { items[this.state.activeIndex].link } />
+          { images }
         </div>
         <Slider
           activeIndex = { this.state.activeIndex }
