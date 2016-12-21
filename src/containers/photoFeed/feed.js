@@ -41,7 +41,7 @@ class PhotoFeed extends React.Component {
 
     return (
       <div className = 'photo-feed'>
-        <Carousel items = { photoList } />
+        <Carousel itemList = { photoList } />
       </div>
     )
   }

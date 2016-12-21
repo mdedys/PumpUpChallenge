@@ -1,4 +1,4 @@
-.carousel-image {
+.carousel {
   min-width  : 100px;
   width      : auto;
   max-width  : 380px;
@@ -12,7 +12,27 @@
   overflow   : hidden;
 }
 
-  .carousel-image img {
-    display : block;
-    margin  : 0 auto;
+.carousel-inner {
+  height     : inherit;
+  transition : margin-left 0.4s ease;
+}
+
+.carousel-image-container {
+  height  : inherit;
+
+  display : inline-block;
+
+  &:not(:first-child) {
+    float : left;
   }
+
+
+}
+
+.carousel-image {
+  display : inline-block;
+
+  &:not(:first-child) {
+    float : left;
+  }
+}

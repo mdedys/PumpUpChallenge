@@ -12,7 +12,7 @@ class CarouselSlider extends React.Component {
 
   static propTypes = {
     activeIndex: PropTypes.number,
-    items: PropTypes.array,
+    itemList: PropTypes.array,
     onClick: PropTypes.func
   }
 
@@ -26,11 +26,12 @@ class CarouselSlider extends React.Component {
 
   render() {
 
-    const { items, activeIndex, onClick } = this.props
+    const { itemList, activeIndex, onClick } = this.props
 
-    const buttons = items.map( ( item, index ) => {
+    const buttons = itemList.map( ( item, index ) => {
 
-      let className = index === activeIndex ? 'slider-active' : 'slider-inactive'
+      let className =
+        index === activeIndex ? 'slider-active' : 'slider-inactive'
 
       return (
         <li className = { className } key = { item.id } >
