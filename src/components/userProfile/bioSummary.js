@@ -55,7 +55,11 @@ class BioSummary extends React.Component {
     let textLines     = [...this.props.children]
     let linesOfText   = []
 
-    while (linesFilled <= MAX_LINES) {
+    // Lines filled index starts at 1. For 3 lines of text we
+    // need to increment MAX_LINES by 1
+    let lastLine = MAX_LINES + 1
+
+    while (linesFilled <= lastLine ) {
       let currentLine = textLines.shift() //Get the next line of text
 
       if (currentLine === null) {
@@ -94,7 +98,7 @@ class BioSummary extends React.Component {
         continue
       }
 
-      let isLastLine = linesFilled === MAX_LINES
+      let isLastLine = linesFilled === lastLine
       let trimObject = this.trimLine(lineText, lineLength, isLastLine)
 
       // Update the textLines with the left over words from the current line

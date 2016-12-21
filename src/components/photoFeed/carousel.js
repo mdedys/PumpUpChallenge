@@ -32,10 +32,11 @@ class Carousel extends React.Component {
       width : 382 //Max Width of carousel
     }
 
-    this.onTouchStart = this.onTouchStart.bind( this )
-    this.onTouchMove  = this.onTouchMove.bind( this )
-    this.onTouchEnd   = this.onTouchEnd.bind( this )
-    this.setPhoto     = this.setPhoto.bind( this )
+    this.onTouchStart = this.onTouchStart.bind(this)
+    this.onTouchMove  = this.onTouchMove.bind(this)
+    this.onTouchEnd   = this.onTouchEnd.bind(this)
+    this.setPhoto     = this.setPhoto.bind(this)
+    this.updateWidth  = this.updateWidth.bind(this)
   }
 
 
@@ -124,15 +125,27 @@ class Carousel extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      width: this.refs.carousel.clientWidth
-    })
+
+    window.addEventListener('resize', this.updateWidth)
+
+    this.updateWidth()
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateWidth)
+  }
 
   ////////////////////
   // EVENT HANDLERS //
   ////////////////////
+
+
+
+  updateWidth() {
+    this.setState({
+      width: this.refs.carousel.clientWidth
+    })
+  }
 
 
   /**
