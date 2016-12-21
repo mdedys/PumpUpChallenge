@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 import feeds               from './feeds'
 import popularPhotos       from './popularPhotos'
-import users               from './user'
+import users               from './users'
 
 export default makeRootReducer
 

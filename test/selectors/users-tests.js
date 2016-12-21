@@ -1,6 +1,6 @@
 import Actions        from '../../src/constants/actions'
-import UserReducer    from '../../src/reducers/user'
-import { getProfile } from '../../src/selectors/user'
+import UserReducer    from '../../src/reducers/users'
+import { getProfile } from '../../src/selectors/users'
 
 
 

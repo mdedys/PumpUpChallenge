@@ -1,7 +1,7 @@
 import should      from 'should'
 
 import Actions     from '../../src/constants/actions'
-import UserReducer from '../../src/reducers/user'
+import UserReducer from '../../src/reducers/users'
 
 describe( 'UserReducer', () => {
   it ( 'should return initial state', () => {

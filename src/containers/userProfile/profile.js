@@ -8,7 +8,7 @@ import LoadingSpinner       from '../../components/loadingSpinner'
 import UserName             from '../../components/userProfile/userName'
 import BioSummary           from '../../components/userProfile/bioSummary'
 import ProfileImage         from '../../components/userProfile/profileImage'
-import { getProfile }       from '../../selectors/user'
+import { getProfile }       from '../../selectors/users'
 
 import './profile.scss'
 

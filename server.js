@@ -20,7 +20,7 @@ app.get('*', function(req, res) {
 
 app.listen(3000, function(err) {
   if (err) {
-      return console.error(err)
+    return console.error(err)
   }
 
   console.log('Listening at http://localhost:3000')

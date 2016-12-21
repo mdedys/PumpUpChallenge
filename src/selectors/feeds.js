@@ -1,18 +1,18 @@
 import { createSelector } from 'reselect'
 
-const getFeed = ( userFeed ) => userFeed
+const getFeed = (userFeed) => userFeed
 
 export const getUserFeed = createSelector(
   [getFeed],
-  function( userFeed ) {
+  function(userFeed) {
 
     if ( !userFeed ) {
       return { isLoaded: false }
     }
 
     return {
-      photoList: userFeed.photoList,
-      isLoaded: userFeed.isLoaded
+      photoList : userFeed.photoList,
+      isLoaded  : userFeed.isLoaded
     }
   }
 )

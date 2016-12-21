@@ -12,27 +12,26 @@
   overflow   : hidden;
 }
 
-.carousel-inner {
-  height     : inherit;
-  transition : margin-left 0.4s ease;
-}
+  .carousel-inner {
+    height     : inherit;
 
-.carousel-image-container {
-  height  : inherit;
-
-  display : inline-block;
-
-  &:not(:first-child) {
-    float : left;
+    transition : margin-left 0.4s ease;
   }
 
+    .carousel-image-container {
+      height  : inherit;
 
-}
+      display : inline-block;
 
-.carousel-image {
-  display : inline-block;
+      &:not(:first-child) {
+        float : left;
+      }
+    }
 
-  &:not(:first-child) {
-    float : left;
-  }
-}
+      .carousel-image {
+        display : inline-block;
+
+        &:not(:first-child) {
+          float : left;
+        }
+      }
