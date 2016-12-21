@@ -12,11 +12,10 @@ const mockStore = configureMockStore( [thunk] )
 
 describe( 'UserActions', () => {
 
-
   const expectedUser = {
-    name: 'Test Name',
-    bio: 'Test Bio',
-    profileThumbnail: 'Test Link'
+    name             : 'Test Name',
+    bio              : 'Test Bio',
+    profileThumbnail : 'Test Link'
   }
 
 
@@ -36,10 +35,10 @@ describe( 'UserActions', () => {
       const store = mockStore( {} )
 
       const expectedActions = {
-        type: Actions.RECEIVE_USER_PROFILE,
-        name: expectedUser.name,
-        bio: expectedUser.bio,
-        thumbnailLink: expectedUser.profileThumbnail
+        type          : Actions.RECEIVE_USER_PROFILE,
+        name          : expectedUser.name,
+        bio           : expectedUser.bio,
+        thumbnailLink : expectedUser.profileThumbnail
       }
 
       return store.dispatch( UserActions.fetchProfile() )

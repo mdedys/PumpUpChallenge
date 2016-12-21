@@ -16,8 +16,8 @@ class Root extends React.Component {
   render() {
     return (
       <div className = 'root' >
-        <UserProfile />
-        <PhotoFeed />
+        <UserProfile id = { 318381 } />
+        <PhotoFeed id = { 318381 } />
         <PopularPhotos />
       </div>
     )

@@ -1,33 +1,28 @@
 import { createSelector } from 'reselect'
 
-const getUser = ( state ) => state.user
-const getUserFeed = ( state ) => state.user.feed
+const getUser = ( user ) => user
 
-export const getUserProfile = createSelector(
+export const getProfile = createSelector(
   [getUser],
   function( user ) {
+
+    if ( !user ) {
+      return {
+        isLoaded: false
+      }
+    }
+
     let summarizedBio = []
-
-    if ( user.profile.bio ) {
-      summarizedBio = user.profile.bio.split( '\n' )
+    if ( user.bio ) {
+      summarizedBio = user.bio.split( '\n' )
     }
 
     return {
-      name          : user.profile.name,
-      bio           : user.profile.bio,
+      name          : user.name,
+      bio           : user.bio,
       summarizedBio : summarizedBio,
-      thumbnailLink : user.profile.image.thumbnail,
-      isLoaded      : user.profile.isLoaded
-    }
-  }
-)
-
-export const getFeedPhotos = createSelector(
-  [getUserFeed],
-  function( feed ) {
-    return {
-      photoList: feed.photoList,
-      isLoaded: feed.isLoaded
+      thumbnailLink : user.image.thumbnail,
+      isLoaded      : user.isLoaded
     }
   }
 )

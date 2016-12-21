@@ -8,7 +8,7 @@ import LoadingSpinner       from '../../components/loadingSpinner'
 import UserName             from '../../components/userProfile/userName'
 import BioSummary           from '../../components/userProfile/bioSummary'
 import ProfileImage         from '../../components/userProfile/profileImage'
-import { getUserProfile }   from '../../selectors/user'
+import { getProfile }       from '../../selectors/user'
 
 import './profile.scss'
 
@@ -43,7 +43,7 @@ class Profile extends React.Component {
 
   render() {
 
-    const { name, summarizedBio, thumbnailLink, isLoaded } = this.props
+    let { name, summarizedBio, thumbnailLink, isLoaded } = this.props
 
     if ( !isLoaded ) {
       return (
@@ -111,8 +111,8 @@ class Profile extends React.Component {
 
 }
 
-const mapStateToProps = function( state ) {
-  return getUserProfile( state )
+const mapStateToProps = function( state, props ) {
+  return getProfile( state.users[props.id] )
 }
 
 const mapDispatchToProps = function( dispatch ) {

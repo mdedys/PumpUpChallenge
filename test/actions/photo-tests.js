@@ -18,8 +18,8 @@ function assertPhotos( receivedAction, actionType, expectedObjectId ) {
 describe( 'PhotoActions', () => {
 
   const photoResponse = {
-    result: {
-      posts: [{
+    result : {
+      posts : [{
         objectId  : 1,
         thumbnail : 'Test Link',
         createdAt : 'Test Date'
@@ -46,7 +46,7 @@ describe( 'PhotoActions', () => {
 
     it( 'should receive user feed photos', () => {
 
-      const store = mockStore( {} )
+      const store            = mockStore( {} )
       const expectedObjectId = photoResponse.result.posts[0].objectId
 
        MockServices
@@ -72,7 +72,7 @@ describe( 'PhotoActions', () => {
 
     it( 'should receive popular photos', () => {
 
-      const store = mockStore( {} )
+      const store            = mockStore( {} )
       const expectedObjectId = photoResponse.result.posts[0].objectId
 
       MockServices

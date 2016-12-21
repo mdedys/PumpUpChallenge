@@ -7,7 +7,7 @@ export default {
   fetchPopularPhotos: fetchPopularPhotos
 }
 
-function receivePhotos( response, type ) {
+function receivePhotos( response, type, userId ) {
   Logger.log( 'Received photos of type: ' + type )
 
   return {
@@ -16,20 +16,21 @@ function receivePhotos( response, type ) {
       return {
         id        : photo.objectId,
         link      : photo.thumbnail,
-        createdAt : photo.createdAt
+        createdAt : new Date( photo.createdAt )
       }
-    })
+    }),
+    id: userId
   }
 }
 
-function fetchFeedPhotos() {
+function fetchFeedPhotos( userId ) {
   Logger.log( 'Fetching feed photos.' )
 
   return dispatch => {
     return PhotoService
       .fetchFeedPhotos()
       .then( response => dispatch(
-          receivePhotos( response, Actions.RECEIVE_FEED_PHOTOS )
+          receivePhotos( response, Actions.RECEIVE_FEED_PHOTOS, userId )
         )
       )
       .catch( error => {

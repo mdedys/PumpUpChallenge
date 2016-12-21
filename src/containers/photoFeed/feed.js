@@ -4,7 +4,7 @@ import { connect }           from 'react-redux'
 import PhotoActions          from '../../actions/photos'
 import Carousel              from '../../components/photoFeed/carousel'
 import LoadingSpinner        from '../../components/loadingSpinner'
-import { getFeedPhotos }     from '../../selectors/user'
+import { getUserFeed }     from '../../selectors/feeds'
 
 import './feed.scss'
 
@@ -15,6 +15,7 @@ class PhotoFeed extends React.Component {
   ////////////////////
 
   static propTypes = {
+    id          : PropTypes.number,
     photoList   : PropTypes.array,
     isLoaded    : PropTypes.bool,
     fetchPhotos : PropTypes.func
@@ -52,19 +53,22 @@ class PhotoFeed extends React.Component {
   /////////////////////
 
   componentDidMount() {
-    this.props.fetchPhotos()
+    this.props.fetchPhotos( this.props.id )
   }
 }
 
 
-const mapStateToProps = function( state ) {
-  return getFeedPhotos( state )
+const mapStateToProps = function( state, props ) {
+  return {
+    id: props.id,
+    ...getUserFeed( state.feeds[props.id] )
+  }
 }
 
 const mapDispatchToProps = function( dispatch ) {
   return {
-    fetchPhotos: () => {
-      dispatch( PhotoActions.fetchFeedPhotos() )
+    fetchPhotos: ( userId ) => {
+      dispatch( PhotoActions.fetchFeedPhotos( userId ) )
     },
     setPhoto: ( photoId ) => {
       dispatch( PhotoActions.setActiveFeedPhoto( photoId ) )

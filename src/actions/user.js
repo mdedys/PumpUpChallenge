@@ -10,10 +10,11 @@ function recieveProfile( user ) {
   Logger.log( 'Received user profile.' )
 
   return {
-    type: Actions.RECEIVE_USER_PROFILE,
-    name: user.name,
-    bio: user.bio,
-    thumbnailLink: user.profileThumbnail
+    type          : Actions.RECEIVE_USER_PROFILE,
+    id            : user.objectId,
+    name          : user.name,
+    bio           : user.bio,
+    thumbnailLink : user.profileThumbnail
   }
 }
 

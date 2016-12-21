@@ -8,7 +8,7 @@ describe( 'ApiHelpers', () => {
 
   describe( 'ApiHelpers.createUrl', () => {
     it ( 'should create url with param', () => {
-      const param = '1'
+      const param            = '1'
       const expectedEndpoint = Api.endpoints.base + routeEndpoint + param
 
       let result = ApiHelpers.createUrl( routeEndpoint, param )

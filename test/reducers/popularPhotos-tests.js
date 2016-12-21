@@ -7,8 +7,8 @@ describe( 'PopularPhotosReducer', () => {
   it ( 'should return initial state', () => {
 
     const initialState = {
-      photoList: [],
-      isLoaded: false
+      photoList : [],
+      isLoaded  : false
     }
 
     PopularPhotosReducer( undefined, {} )
@@ -18,14 +18,13 @@ describe( 'PopularPhotosReducer', () => {
   it ( 'should handle RECEIVE_POPULAR_PHOTOS', () => {
 
     const expectedState = {
-      photoList: [1,2,3,4,5],
-      isLoaded: true
+      photoList : [1,2,3,4,5],
+      isLoaded  : true
     }
 
     const action = {
-      type: Actions.RECEIVE_POPULAR_PHOTOS,
-      photoList: [1,2,3,4,5],
-      isLoaded: true
+      type      : Actions.RECEIVE_POPULAR_PHOTOS,
+      photoList : [1,2,3,4,5],
     }
 
     PopularPhotosReducer( undefined, action )
