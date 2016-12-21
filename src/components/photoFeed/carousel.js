@@ -105,11 +105,10 @@ class Carousel extends React.Component {
     return (
       <div
         className    = 'carousel-container'
-        ref          = 'container'
         onTouchStart = {this.onTouchStart}
         onTouchMove  = {this.onTouchMove}
         onTouchEnd   = {this.onTouchEnd} >
-        <div className = 'carousel'>
+        <div className = 'carousel' ref = 'carousel'>
           <div
             className = 'carousel-inner'
             style     = {carouselInnerStyle} >
@@ -126,7 +125,7 @@ class Carousel extends React.Component {
 
   componentDidMount() {
     this.setState({
-      width: this.refs.container.clientWidth
+      width: this.refs.carousel.clientWidth
     })
   }
 
