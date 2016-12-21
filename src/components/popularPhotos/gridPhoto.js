@@ -11,7 +11,7 @@ class Photo extends React.Component {
 
 
   static propTypes = {
-    link: PropTypes.string
+    link : PropTypes.string
   }
 
 
@@ -28,7 +28,7 @@ class Photo extends React.Component {
 
     return(
       <div className = 'grid-photo'>
-        <img src = { link } />
+        <img src = {link} />
       </div>
     )
   }

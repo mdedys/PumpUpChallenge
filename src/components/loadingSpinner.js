@@ -15,6 +15,4 @@ class LoadingSpinner extends React.Component {
   }
 }
 
-LoadingSpinner.propTypes = {}
-
 export default LoadingSpinner

@@ -18,6 +18,7 @@ class Carousel extends React.Component {
     itemList   : PropTypes.array,
   }
 
+
   constructor() {
     super()
 
@@ -32,9 +33,9 @@ class Carousel extends React.Component {
     }
 
     this.onTouchStart = this.onTouchStart.bind( this )
-    this.onTouchMove = this.onTouchMove.bind( this )
-    this.onTouchEnd = this.onTouchEnd.bind( this )
-    this.setPhoto = this.setPhoto.bind( this )
+    this.onTouchMove  = this.onTouchMove.bind( this )
+    this.onTouchEnd   = this.onTouchEnd.bind( this )
+    this.setPhoto     = this.setPhoto.bind( this )
   }
 
 
@@ -43,32 +44,47 @@ class Carousel extends React.Component {
   // RENDERINGS //
   ////////////////
 
-  renderImage( link, key ) {
+
+
+  /**
+  * Will create image node for carousel
+  *
+  * @param  {String} link Image url
+  * @param  {Number} key Key for containing div
+  *
+  * @return {Object} Image Node
+  */
+  buildImage( link, key ) {
     return (
       <div
         key       = {key}
         className = 'carousel-image-container'
-        style     = { { width: this.state.width } } >
+        style     = {{width: this.state.width}} >
           <img
             className = 'carousel-image'
-            src       = { link } />
+            src       = {link} />
       </div>
     )
   }
 
+  /**
+  * Will render all the images for the carousel
+  *
+  * @return {Object[]} Array of react nodes contains images
+  */
   renderImages() {
-    const { itemList } = this.props;
+    const { itemList }   = this.props;
 
-    let imageList = []
+    let imageList        = []
     let lengthOfItemList = itemList.length
 
     imageList.push(
-      this.renderImage( itemList[lengthOfItemList-1].link, lengthOfItemList-1 )
+      this.buildImage( itemList[lengthOfItemList-1].link, lengthOfItemList-1 )
     )
 
     for ( let i = 0; i < itemList.length - 1; i++ ) {
       imageList.push(
-        this.renderImage( itemList[i].link, i )
+        this.buildImage( itemList[i].link, i )
       )
     }
 
@@ -78,7 +94,7 @@ class Carousel extends React.Component {
 
   render() {
 
-    const { itemList } = this.props
+    const { itemList }                       = this.props
     const { marginLeft, width, activeIndex } = this.state
 
     let carouselInnerStyle = {
@@ -90,20 +106,20 @@ class Carousel extends React.Component {
       <div
         className    = 'carousel-container'
         ref          = 'container'
-        onTouchStart = { this.onTouchStart }
-        onTouchMove  = { this.onTouchMove }
-        onTouchEnd   = { this.onTouchEnd } >
+        onTouchStart = {this.onTouchStart}
+        onTouchMove  = {this.onTouchMove}
+        onTouchEnd   = {this.onTouchEnd} >
         <div className = 'carousel'>
           <div
             className = 'carousel-inner'
-            style     = { carouselInnerStyle } >
+            style     = {carouselInnerStyle} >
             { this.renderImages() }
           </div>
         </div>
         <Slider
-          activeIndex = { activeIndex }
-          itemList    = { itemList }
-          onClick     = { this.setPhoto } />
+          activeIndex = {activeIndex}
+          itemList    = {itemList}
+          onClick     = {this.setPhoto} />
       </div>
     )
   }
@@ -120,21 +136,28 @@ class Carousel extends React.Component {
   ////////////////////
 
 
-
-  setPhoto( index ) {
+  /**
+  * Handle carousel slider button click. Will change the active index of
+  * the carousel to the passed in index.
+  *
+  * @param  {Number} index Next index of carousel
+  *
+  * @return {Object[]} Array of react nodes contains images
+  */
+  setPhoto(index) {
     const { activeIndex, marginLeft, width } = this.state;
 
-    if ( index === activeIndex ) {
+    if (index === activeIndex) {
       return
     }
 
-    let moveBy = Math.abs( ( activeIndex - index ) * width )
+    let moveBy = Math.abs((activeIndex - index) * width)
 
     let updatedMarginLeft;
-    if ( index > activeIndex ) {
+    if (index > activeIndex) {
       updatedMarginLeft = marginLeft - moveBy
     }
-    else if ( index < activeIndex ) {
+    else if (index < activeIndex) {
       updatedMarginLeft = marginLeft + moveBy
     }
     else {
@@ -148,8 +171,13 @@ class Carousel extends React.Component {
   }
 
 
-  onTouchStart( evt ) {
-    if ( evt.touches.length !== 1 ) {
+  /**
+  * Will initiate a user touch on the screen
+  *
+  * @param  {Object} evt Browser touch event
+  */
+  onTouchStart(evt) {
+    if (evt.touches.length !== 1) {
       return
     }
 
@@ -161,7 +189,12 @@ class Carousel extends React.Component {
   }
 
 
-  onTouchMove( evt ) {
+  /**
+  * Will update the state the of the direction of the swipe
+  *
+  * @param  {Object} evt Browser touch event
+  */
+  onTouchMove(evt) {
     if ( evt.touches.length !== 1 ) {
       return
     }
@@ -169,15 +202,15 @@ class Carousel extends React.Component {
     let touch = evt.touches[0]
     let direction = this.state.direction
 
-    let swipeLengthX = this.getSwipeLengthX( touch )
+    let swipeLengthX = this.getSwipeLengthX(touch)
 
-    if ( swipeLengthX > SWIPE_THRESHOLD ) {
-      direction = this.getSwipeDirection( touch )
+    if (swipeLengthX > SWIPE_THRESHOLD) {
+      direction = this.getSwipeDirection(touch)
     }
 
-    let directionIsUnchanged = this.isSwipeDirectionUnchanged( direction )
+    let directionIsUnchanged = this.isSwipeDirectionUnchanged(direction)
 
-    if ( directionIsUnchanged ) {
+    if (directionIsUnchanged) {
 
       this.setState({
         direction : direction,
@@ -191,24 +224,29 @@ class Carousel extends React.Component {
   }
 
 
-  onTouchEnd( evt ) {
+  /**
+  * Will end the touch and set activeIndex and marginLeft if the swipe was
+  * greater than the MIN_SWIPE_DISTANCE.
+  *
+  * @param  {Object} evt Browser touch event
+  */
+  onTouchEnd(evt) {
 
-    if ( !this.state.direction ) {
+    if (!this.state.direction) {
       return
     }
 
+    let swipeLengthX = this.getSwipeLengthX(this.state.initialTouch)
 
-    let swipeLengthX = this.getSwipeLengthX( this.state.initialTouch )
-
-    if ( swipeLengthX > MIN_SWIPE_DISTANCE ) {
+    if (swipeLengthX > MIN_SWIPE_DISTANCE) {
 
       const { itemList } = this.props
       const { activeIndex, marginLeft, width } = this.state
 
       // Will update index to next index if swipe direction is left and
       // not at the last index
-      if ( this.state.direction === SWIPE_LEFT
-        && activeIndex !== itemList.length - 1 ) {
+      if (this.state.direction === SWIPE_LEFT
+        && activeIndex !== itemList.length - 1) {
 
         this.setState({
           activeIndex : activeIndex + 1,
@@ -217,8 +255,8 @@ class Carousel extends React.Component {
       }
       // Will update index to previous index if swipe direction is right and
       // not at the first index
-      else if ( this.state.direction === SWIPE_RIGHT
-        && activeIndex !== 0 ) {
+      else if (this.state.direction === SWIPE_RIGHT
+        && activeIndex !== 0) {
 
         this.setState({
           activeIndex : activeIndex - 1,
@@ -246,8 +284,8 @@ class Carousel extends React.Component {
   *
   * @return {Number} The length of the horizontal swipe
   */
-  getSwipeLengthX( touch ) {
-    return Math.abs( touch.pageX - this.state.touch.pageX )
+  getSwipeLengthX(touch) {
+    return Math.abs(touch.pageX - this.state.touch.pageX)
   }
 
 
@@ -258,7 +296,7 @@ class Carousel extends React.Component {
   *
   * @return {String} The direction of the swipe
   */
-  getSwipeDirection( touch ) {
+  getSwipeDirection(touch) {
     return touch.pageX < this.state.touch.pageX ? 'Left' : 'Right'
   }
 
@@ -270,7 +308,7 @@ class Carousel extends React.Component {
   *
   * @return {Bool} Boolean flag showing if the direction changed
   */
-  isSwipeDirectionUnchanged( direction ) {
+  isSwipeDirectionUnchanged(direction) {
     return !this.state.direction ||
       this.state.direction === direction
   }

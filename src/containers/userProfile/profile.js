@@ -18,6 +18,8 @@ class Profile extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     name          : PropTypes.string,
     bio           : PropTypes.string,
@@ -27,12 +29,13 @@ class Profile extends React.Component {
     fetchProfile  : PropTypes.func
   }
 
+
   constructor() {
     super()
 
     this.state = { isExpanded: false }
 
-    this.readMore = this.readMore.bind( this )
+    this.readMore = this.readMore.bind(this)
   }
 
 
@@ -45,7 +48,7 @@ class Profile extends React.Component {
 
     let { name, summarizedBio, thumbnailLink, isLoaded } = this.props
 
-    if ( !isLoaded ) {
+    if (!isLoaded) {
       return (
         <div className = 'profile' >
           <LoadingSpinner />
@@ -53,15 +56,15 @@ class Profile extends React.Component {
       )
     }
 
-    let profileClassName = ClassNames( 'profile', {
+    let profileClassName = ClassNames('profile', {
       'expanded': this.state.isExpanded
     })
 
     return (
-      <div className = { profileClassName } >
+      <div className = {profileClassName} >
 
         <div className = 'profile-image-container'>
-          <ProfileImage thumbnailLink = { thumbnailLink } />
+          <ProfileImage thumbnailLink = {thumbnailLink} />
         </div>
 
         <div className = 'profile-info-container'>
@@ -69,8 +72,8 @@ class Profile extends React.Component {
               {name}
             </UserName>
             <BioSummary
-              isExpanded={this.state.isExpanded}
-              onReadMore={this.readMore} >
+              isExpanded = {this.state.isExpanded}
+              onReadMore = {this.readMore} >
                 {summarizedBio}
             </BioSummary>
         </div>
@@ -85,6 +88,8 @@ class Profile extends React.Component {
   // LIFECYCLE HOOKS //
   /////////////////////
 
+
+
   shouldComponentUpdate(nextProps, nextState) {
     let didNameChange = nextProps.name !== this.props.name
     let didBioChange = nextProps.bio !== this.props.bio
@@ -94,6 +99,7 @@ class Profile extends React.Component {
 
     return didNameChange || didBioChange || didImageChange || didBioExpand
   }
+
 
   componentDidMount() {
     this.props.fetchProfile()
@@ -105,27 +111,34 @@ class Profile extends React.Component {
   // EVENT HANDLERS //
   ////////////////////
 
+
+  // Expand user bio
   readMore() {
     this.setState({ isExpanded: true })
   }
 
 }
 
-const mapStateToProps = function( state, props ) {
+
+
+const mapStateToProps = function(state, props) {
   return getProfile( state.users[props.id] )
 }
 
-const mapDispatchToProps = function( dispatch ) {
+
+const mapDispatchToProps = function(dispatch) {
   return {
     fetchProfile: () => {
-      dispatch( UserActions.fetchProfile() )
+      dispatch(UserActions.fetchProfile())
     }
   }
 }
 
+
 const profile = connect(
   mapStateToProps,
   mapDispatchToProps
-)( Profile )
+)(Profile)
+
 
 export default profile

@@ -8,14 +8,14 @@ export default _createStore
 
 /**
  * Create the store with applicable middleware for the application
- * 
+ *
  * @return {Object} The created store
  */
 function _createStore() {
 
   let store = createStore(
     MakeRootReducer(),
-    applyMiddleware( Thunk )
+    applyMiddleware(Thunk)
   )
 
   return store

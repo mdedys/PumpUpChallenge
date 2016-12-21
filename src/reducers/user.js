@@ -2,9 +2,9 @@ import Actions from '../constants/actions'
 
 export default users
 
-function users( state = {}, action ) {
+function users(state = {}, action) {
 
-  switch ( action.type ) {
+  switch (action.type) {
 
   case Actions.RECEIVE_USER_PROFILE:
     return {

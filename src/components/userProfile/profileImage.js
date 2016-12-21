@@ -15,7 +15,6 @@ class ProfileImage extends React.Component {
   }
 
 
-
   ////////////////
   // RENDERINGS //
   ////////////////
@@ -28,7 +27,7 @@ class ProfileImage extends React.Component {
 
     return (
       <div className = 'profile-image-outer'>
-        <img className = 'profile-image-inner' src = { thumbnailLink } />
+        <img className = 'profile-image-inner' src = {thumbnailLink} />
       </div>
     )
   }

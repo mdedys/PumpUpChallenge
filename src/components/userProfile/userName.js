@@ -11,9 +11,8 @@ class UserName extends React.Component {
 
 
   static propTypes = {
-    children: PropTypes.string
+    children : PropTypes.string
   }
-
 
 
   ////////////////
@@ -25,7 +24,7 @@ class UserName extends React.Component {
   render() {
     return (
       <div className = 'user-name'>
-        {this.props.children}
+        { this.props.children }
       </div>
     )
   }

@@ -8,7 +8,7 @@ export default makeRootReducer
 
 function makeRootReducer() {
 
-  let rootReducer= combineReducers({
+  let rootReducer = combineReducers({
     feeds,
     popularPhotos,
     users

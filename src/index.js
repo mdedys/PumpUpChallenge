@@ -9,8 +9,8 @@ import CreateStore  from './store/createStore'
 const store = CreateStore()
 
 ReactDOM.render(
-  <Provider store = { store } >
+  <Provider store = {store} >
     <Root />
   </Provider>,
-  document.getElementById( 'root' )
+  document.getElementById('root')
 )

@@ -14,6 +14,8 @@ class PhotoFeed extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     id          : PropTypes.number,
     photoList   : PropTypes.array,
@@ -22,16 +24,17 @@ class PhotoFeed extends React.Component {
   }
 
 
-
   ////////////////
   // RENDERINGS //
   ////////////////
+
+
 
   render() {
 
     const { photoList, isLoaded } = this.props
 
-    if ( !isLoaded ) {
+    if (!isLoaded) {
       return (
         <div className = 'photo-feed' >
           <LoadingSpinner />
@@ -41,44 +44,48 @@ class PhotoFeed extends React.Component {
 
     return (
       <div className = 'photo-feed'>
-        <Carousel itemList = { photoList } />
+        <Carousel itemList = {photoList} />
       </div>
     )
   }
-
 
 
   /////////////////////
   // LIFECYCLE HOOKS //
   /////////////////////
 
+
+
   componentDidMount() {
-    this.props.fetchPhotos( this.props.id )
+    this.props.fetchPhotos(this.props.id)
   }
 }
 
 
-const mapStateToProps = function( state, props ) {
+const mapStateToProps = function(state, props) {
   return {
     id: props.id,
-    ...getUserFeed( state.feeds[props.id] )
+    ...getUserFeed(state.feeds[props.id])
   }
 }
 
-const mapDispatchToProps = function( dispatch ) {
+
+const mapDispatchToProps = function(dispatch) {
   return {
-    fetchPhotos: ( userId ) => {
-      dispatch( PhotoActions.fetchFeedPhotos( userId ) )
+    fetchPhotos: (userId) => {
+      dispatch(PhotoActions.fetchFeedPhotos(userId))
     },
-    setPhoto: ( photoId ) => {
-      dispatch( PhotoActions.setActiveFeedPhoto( photoId ) )
+    setPhoto: (photoId) => {
+      dispatch(PhotoActions.setActiveFeedPhoto(photoId))
     }
   }
 }
 
+
 const photoFeed = connect(
   mapStateToProps,
   mapDispatchToProps
-)( PhotoFeed )
+)(PhotoFeed)
+
 
 export default photoFeed

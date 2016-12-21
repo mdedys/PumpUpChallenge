@@ -13,12 +13,13 @@ class Grid extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     photoList   : PropTypes.array,
     isLoaded    : PropTypes.bool,
     fetchPhotos : PropTypes.func
   }
-
 
 
   ////////////////
@@ -29,12 +30,12 @@ class Grid extends React.Component {
 
     const { photoList, isLoaded } = this.props
 
-    if ( !isLoaded ) {
+    if (!isLoaded) {
       return null
     }
 
-    const photos = photoList.map( photo => {
-      return <GridPhoto key = { photo.id } link = { photo.link } />
+    const photos = photoList.map(photo => {
+      return <GridPhoto key = {photo.id} link = {photo.link} />
     })
 
     return (
@@ -56,21 +57,24 @@ class Grid extends React.Component {
 
 }
 
-const mapStateToProps = function( state ) {
+
+const mapStateToProps = function(state) {
   return getPopularPhotos( state )
 }
 
-const mapDispatchToProps = function( dispatch ) {
+
+const mapDispatchToProps = function(dispatch) {
   return {
     fetchPhotos: () => {
-      dispatch( PhotoActions.fetchPopularPhotos() )
+      dispatch(PhotoActions.fetchPopularPhotos())
     }
   }
 }
 
+
 const grid = connect(
   mapStateToProps,
   mapDispatchToProps
-)( Grid )
+)(Grid)
 
 export default grid

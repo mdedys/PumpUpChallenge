@@ -1,20 +1,20 @@
 import { createSelector } from 'reselect'
 
-const getUser = ( user ) => user
+const getUser = (user) => user
 
 export const getProfile = createSelector(
   [getUser],
-  function( user ) {
+  function(user) {
 
-    if ( !user ) {
+    if (!user) {
       return {
         isLoaded: false
       }
     }
 
     let summarizedBio = []
-    if ( user.bio ) {
-      summarizedBio = user.bio.split( '\n' )
+    if (user.bio) {
+      summarizedBio = user.bio.split('\n')
     }
 
     return {

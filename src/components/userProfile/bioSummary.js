@@ -12,22 +12,23 @@ class BioSummary extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     children   : PropTypes.array,
     isExpanded : PropTypes.bool,
     onReadMore : PropTypes.func
   }
-  
+
 
   constructor() {
     super()
 
     this.state = { summarizerWidth: null }
 
-    this.resize = this.resize.bind( this )
+    this.resize   = this.resize.bind( this )
     this.readMore = this.readMore.bind( this )
   }
-
 
 
   ////////////////
@@ -40,13 +41,13 @@ class BioSummary extends React.Component {
   * Will parse the user bio and generate 3 lines of texts. If the text is too long,
   * the text will be truncated and a read more button will be appened to allow the user to
   * expand the user bio.
-  * 
+  *
   * @return {Object[]} Will return an array of React Nodes with 3 lines of the user bio
   * and potentially a read more button if the text had to be truncated
   */
   renderText() {
 
-    if ( this.props.children.length === 0 ) {
+    if (this.props.children.length === 0) {
       return []
     }
 
@@ -54,10 +55,10 @@ class BioSummary extends React.Component {
     let textLines     = [...this.props.children]
     let linesOfText   = []
 
-    while ( linesFilled <= MAX_LINES ) {
+    while (linesFilled <= MAX_LINES) {
       let currentLine = textLines.shift() //Get the next line of text
 
-      if ( currentLine === null ) {
+      if (currentLine === null) {
         break
       }
 
@@ -68,7 +69,7 @@ class BioSummary extends React.Component {
       let shouldAppendToLine = linesFilled === linesOfText.length
 
       // If the current line is not full, append to the line otherwise set the line text
-      if ( shouldAppendToLine ) {
+      if (shouldAppendToLine) {
         existingLineText = linesOfText[linesFilled - 1]
         lineText = existingLineText + currentLine
       }
@@ -76,16 +77,17 @@ class BioSummary extends React.Component {
         lineText = currentLine
       }
 
-      lineLength = this.measureText( lineText )
+      lineLength = this.measureText(lineText)
+
       let isTextTooLong = lineLength >= this.state.summarizerWidth
 
       // If the current line is not full and the text fits update the current line
-      if ( !isTextTooLong && shouldAppendToLine) {
+      if (!isTextTooLong && shouldAppendToLine) {
         linesOfText[linesFilled - 1] = lineText
         continue
       }
       // If the text is not too long create a new line of text
-      else if ( !isTextTooLong ) {
+      else if (!isTextTooLong) {
         linesOfText.push(
           lineText
         )
@@ -93,37 +95,37 @@ class BioSummary extends React.Component {
       }
 
       let isLastLine = linesFilled === MAX_LINES
-      let trimObject = this.trimLine( lineText, lineLength, isLastLine )
+      let trimObject = this.trimLine(lineText, lineLength, isLastLine)
 
       // Update the textLines with the left over words from the current line
-      if ( !isLastLine ) {
+      if (!isLastLine) {
         textLines = [trimObject.leftOverText, ...textLines]
       }
 
-      if ( shouldAppendToLine ) {
+      if (shouldAppendToLine) {
         linesOfText[linesFilled - 1] = trimObject.newLine
       } else {
-        linesOfText.push( trimObject.newLine )
+        linesOfText.push(trimObject.newLine)
       }
 
       linesFilled++
     }
 
-    return this.buildText( linesOfText )
+    return this.buildText(linesOfText)
   }
 
 
   /**
-  * Will take the current line and determine which words have to be trimmed in order for the line of 
+  * Will take the current line and determine which words have to be trimmed in order for the line of
   * text to fit into one line. The result along with the truncated words will be returned.
-  * 
+  *
   * @param  {String} lineText The current line of text
   * @param  {Number} lineLength The current length of the line
   * @param  {Bool} isLastLine A flag to determine if the curren line is the last line
-  * 
+  *
   * @return {Object} Object containing the new line of text and the words that were truncated
   */
-  trimLine( lineText, lineLength, isLastLine ) {
+  trimLine(lineText, lineLength, isLastLine) {
 
     let newLine       = ''
     let leftOverWords = []
@@ -131,37 +133,43 @@ class BioSummary extends React.Component {
 
     let words = lineText.split( ' ' )
 
-    while ( curLineLength >= this.state.summarizerWidth ) {
+    while (curLineLength >= this.state.summarizerWidth) {
       let lastWord = words.pop()
+
+      if (!lastWord) {
+        break;
+      }
+
       leftOverWords.push( lastWord )
-      newLine = words.join( ' ' )
+      newLine = words.join(' ')
 
       let lineWithTail = isLastLine ? newLine + '... read more' : newLine
-      curLineLength = this.measureText( lineWithTail )
+
+      curLineLength = this.measureText(lineWithTail)
     }
 
     let leftOverText = ''
-    if ( !isLastLine ) {
+    if (!isLastLine) {
       leftOverText = ' ' + leftOverWords.reverse().join( ' ' )
     }
 
     return {
-      newLine: newLine,
-      leftOverText: leftOverText
+      newLine      : newLine,
+      leftOverText : leftOverText
     }
   }
 
 
   /**
-  * Will take the lines of text and generate React Node containing text. Will also parse any
-  * hashtags or mentions
-  * 
+  * Will take the lines of text and generate React Node containing text.
+  * Will also parse any hashtags or mentions
+  *
   * @return {Object[]} Array of React Nodes that will be rendered
   */
-  buildText( linesOfText ) {
-    return linesOfText.map( ( line, index ) => {
+  buildText(linesOfText) {
+    return linesOfText.map( (line, index ) => {
       return (
-        <span key = { 'line-' + index } >
+        <span key = {'line-' + index} >
           { TagParser.convertTags( line ) }
         </span>
       )
@@ -173,12 +181,12 @@ class BioSummary extends React.Component {
 
     const { children } = this.props
 
-    if ( this.state.summarizerWidth && !this.props.isExpanded ) {
+    if (this.state.summarizerWidth && !this.props.isExpanded) {
 
       return (
         <div className = 'bio-summary' ref = 'summarizer'>
            {this.renderText()}
-          <span>... <a className = 'read-more' onClick = { this.readMore } >read more</a></span>
+          <span>... <a className = 'read-more' onClick = {this.readMore}>read more</a></span>
         </div>
       )
 
@@ -186,25 +194,23 @@ class BioSummary extends React.Component {
 
     return (
       <div className = 'bio-summary expanded' ref = 'summarizer'>
-        {children.map( TagParser.convertTags )}
+        { children.map(TagParser.convertTags) }
       </div>
     )
   }
 
 
-
   /////////////////////
   // LIFECYCLE HOOKS //
   /////////////////////
-  
+
 
 
   componentDidMount() {
-    let canvas = document.createElement( 'canvas' )
-    this.canvas = canvas.getContext( '2d' )
+    let canvas  = document.createElement('canvas')
+    this.canvas = canvas.getContext('2d')
 
-
-    let style = window.getComputedStyle( this.refs.summarizer )
+    let style = window.getComputedStyle(this.refs.summarizer)
 
     let font = [
       style['font-weight'],
@@ -215,16 +221,15 @@ class BioSummary extends React.Component {
 
     this.canvas.font = font
 
-    window.addEventListener( 'resize', this.resize )
+    window.addEventListener('resize', this.resize)
 
     this.resize()
   }
 
 
   componentWillUnmount() {
-    window.removeEventListener( 'resize', this.resize )
+    window.removeEventListener('resize', this.resize)
   }
-
 
 
   ////////////////////
@@ -238,7 +243,7 @@ class BioSummary extends React.Component {
   */
   resize() {
 
-    if ( this.props.isExpanded ) {
+    if (this.props.isExpanded) {
       return
     }
 
@@ -248,13 +253,13 @@ class BioSummary extends React.Component {
     // width of the container is incorrect in some
     // browsers
     let offset = 0
-    if ( !this.state.summarizerWidth ) {
+    if (!this.state.summarizerWidth) {
       offset = 50
     }
 
-    this.setState(
-      { summarizerWidth: summarizer.getBoundingClientRect().width - offset }
-    )
+    this.setState({
+      summarizerWidth: summarizer.getBoundingClientRect().width - offset
+    })
   }
 
 
@@ -262,7 +267,7 @@ class BioSummary extends React.Component {
   * Event handle for when the user will select the read more button. Will trigger the onReadMore callback
   */
   readMore() {
-    if ( this.props.onReadMore ) {
+    if (this.props.onReadMore) {
       this.props.onReadMore()
     }
   }
@@ -275,8 +280,8 @@ class BioSummary extends React.Component {
   *
   * @return {Number} Width of the text
   */
-  measureText( text ) {
-    return this.canvas.measureText( text ).width
+  measureText(text) {
+    return this.canvas.measureText(text).width
   }
 
 }
