@@ -153,8 +153,6 @@ class Carousel extends React.Component {
   * the carousel to the passed in index.
   *
   * @param  {Number} index Next index of carousel
-  *
-  * @return {Object[]} Array of react nodes contains images
   */
   setPhoto(index) {
     const { activeIndex, marginLeft, width } = this.state
