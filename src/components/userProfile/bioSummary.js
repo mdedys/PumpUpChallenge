@@ -141,7 +141,7 @@ class BioSummary extends React.Component {
       let lastWord = words.pop()
 
       if (!lastWord) {
-        break;
+        break
       }
 
       leftOverWords.push( lastWord )

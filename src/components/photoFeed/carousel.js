@@ -74,7 +74,7 @@ class Carousel extends React.Component {
   * @return {Object[]} Array of react nodes contains images
   */
   renderImages() {
-    const { itemList }   = this.props;
+    const { itemList }   = this.props
 
     let imageList        = []
     let lengthOfItemList = itemList.length
@@ -157,7 +157,7 @@ class Carousel extends React.Component {
   * @return {Object[]} Array of react nodes contains images
   */
   setPhoto(index) {
-    const { activeIndex, marginLeft, width } = this.state;
+    const { activeIndex, marginLeft, width } = this.state
 
     if (index === activeIndex) {
       return
@@ -165,7 +165,7 @@ class Carousel extends React.Component {
 
     let moveBy = Math.abs((activeIndex - index) * width)
 
-    let updatedMarginLeft;
+    let updatedMarginLeft
     if (index > activeIndex) {
       updatedMarginLeft = marginLeft - moveBy
     }
