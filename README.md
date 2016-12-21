@@ -1,4 +1,4 @@
-# PumpUpChallenege
+# PumpUpChallenge
 
 PumpUp Code Challenge
 
