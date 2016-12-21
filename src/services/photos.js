@@ -7,6 +7,12 @@ export default {
   fetchPopularPhotos: fetchPopularPhotos
 }
 
+
+/**
+ * Async fetch feed photos for a user
+ * 
+ * @return {Promise} A promise containing the request to fetch feed photos
+ */
 function fetchFeedPhotos() {
   let url = ApiHelpers.createUrl( API.endpoints.feedPhotos )
 
@@ -20,6 +26,12 @@ function fetchFeedPhotos() {
   return Request.post( url, payload )
 }
 
+
+/**
+ * Aync fetch popular photos
+ * 
+ * @return {Promise} A promise containing the request to fetch popular photos.
+ */
 function fetchPopularPhotos() {
   let url = ApiHelpers.createUrl( API.endpoints.popularPhotos )
 

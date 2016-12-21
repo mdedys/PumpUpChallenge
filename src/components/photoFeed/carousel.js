@@ -12,6 +12,8 @@ class Carousel extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     items   : PropTypes.array,
   }
@@ -39,9 +41,20 @@ class Carousel extends React.Component {
   // RENDERINGS //
   ////////////////
 
+
+
   render() {
 
     const { items } = this.props
+
+    const images = items.map( ( item, index ) => {
+      let style = index === this.state.activeIndex ? {} : { display: 'none' }
+      return (
+        <div className = 'crousel-image-container' style = { style } >
+          <img src = { item.link } />
+        </div>
+      )
+    })
 
     return (
       <div
@@ -50,7 +63,7 @@ class Carousel extends React.Component {
         onTouchMove  = { this.onTouchMove }
         onTouchEnd   = { this.onTouchEnd } >
         <div className = 'carousel-image'>
-          <img src = { items[this.state.activeIndex].link } />
+          { images }
         </div>
         <Slider
           activeIndex = { this.state.activeIndex }
@@ -65,6 +78,8 @@ class Carousel extends React.Component {
   ////////////////////
   // EVENT HANDLERS //
   ////////////////////
+
+
 
   setPhoto( index ) {
     this.setState( { activeIndex: index } )
@@ -82,6 +97,7 @@ class Carousel extends React.Component {
       touch: evt.touches[0]
     })
   }
+
 
   onTouchMove( evt ) {
     if ( evt.touches.length !== 1 ) {
@@ -109,6 +125,7 @@ class Carousel extends React.Component {
     this.resetSwipe()
   }
 
+
   onTouchEnd( evt ) {
     if ( !this.state.direction ) {
       return
@@ -135,19 +152,48 @@ class Carousel extends React.Component {
   // HELPER METHODS //
   ////////////////////
 
+
+
+  /**
+  * Will get the length in the horizontal direction of the current swipe
+  *
+  * @param  {Object} touch The current touch event
+  * 
+  * @return {Number} The length of the horizontal swipe
+  */
   getSwipeLengthX( touch ) {
     return Math.abs( touch.pageX - this.state.touch.pageX )
   }
 
+
+  /**
+  * Will get the direction of the swipe
+  *
+  * @param {Object} touch The current touch event
+  * 
+  * @return {String} The direction of the swipe
+  */
   getSwipeDirection( touch ) {
     return touch.pageX < this.state.touch.pageX ? 'Left' : 'Right'
   }
 
+
+  /**
+  * Will determine if the swipe direction has been changed
+  *
+  * @param {String} direction The current direction of the swipe
+  * 
+  * @return {Bool} Boolean flag showing if the direction changed
+  */
   isSwipeDirectionUnchanged( direction ) {
     return !this.state.direction ||
       this.state.direction === direction
   }
 
+
+  /**
+  * Reset the swipe and update the current state
+  */
   resetSwipe() {
     this.setState({
       direction    : null,

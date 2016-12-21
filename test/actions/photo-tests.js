@@ -55,7 +55,7 @@ describe( 'PhotoActions', () => {
 
       expectedActions.type = Actions.RECEIVE_FEED_PHOTOS
 
-      return store.dispatch( PhotoActions.fetchFeedPhotos() )
+      return store.dispatch( PhotoActions.fetchFeedPhotos(1) )
         .then( () => {
 
           assertPhotos(

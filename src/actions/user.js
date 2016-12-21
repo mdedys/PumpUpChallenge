@@ -1,11 +1,19 @@
-import UserService from '../services/user'
 import Actions     from '../constants/actions'
-import Logger      from'../utils/logger'
+import UserService from '../services/user'
+import Logger      from '../utils/logger'
 
 export default {
   fetchProfile: fetchProfile
 }
 
+
+ /**
+ * Will receive the fetched userd and dispatch an action containing the user information
+ * 
+ * @param  {String} user The user that was fetched from the api
+ * 
+ * @return {Object} Object containing the action type and formatted user
+ */
 function recieveProfile( user ) {
   Logger.log( 'Received user profile.' )
 
@@ -18,6 +26,14 @@ function recieveProfile( user ) {
   }
 }
 
+
+ /**
+ * Will trigger an async request to fetch the user profile
+ * If successful will call receiveProfile to dispatch the results to the
+ * store
+ *
+ * @return {Object} TODO
+ */
 function fetchProfile() {
   Logger.log( 'Fetching user profile.' )
 

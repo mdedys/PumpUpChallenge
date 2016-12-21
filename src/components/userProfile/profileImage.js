@@ -8,6 +8,8 @@ class ProfileImage extends React.Component {
   // PROPS & STATES //
   ////////////////////
 
+
+
   static propTypes = {
     thumbnailLink: PropTypes.string
   }
@@ -17,6 +19,8 @@ class ProfileImage extends React.Component {
   ////////////////
   // RENDERINGS //
   ////////////////
+
+
 
   render() {
 
