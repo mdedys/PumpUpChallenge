@@ -1,7 +1,9 @@
+import express from 'express'
 import path    from 'path'
 import webpack from 'webpack'
-import express from 'express'
+
 import config  from './webpack.config'
+
 
 const app      = express()
 const compiler = webpack(config)

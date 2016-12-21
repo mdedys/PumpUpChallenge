@@ -3,12 +3,12 @@ const webpack = require( 'webpack' )
 
 module.exports = {
   devtool : 'cheap-module-eval-source-map',
-  entry : [
+  entry   : [
     'babel-polyfill',
     'webpack-hot-middleware/client',
     './src/index'
   ],
-  output : {
+  output  : {
     path       : path.join( __dirname, 'dist' ),
     filename   : 'bundle.js',
     publicPath : '/static/'
@@ -16,7 +16,7 @@ module.exports = {
   plugins : [
     new webpack.HotModuleReplacementPlugin()
   ],
-  module : {
+  module  : {
     loaders : [
       {
         test    : /\.js$/,
@@ -26,7 +26,7 @@ module.exports = {
       {
         test    : /\.scss$/,
         include : path.join( __dirname, 'src' ),
-        loaders  : [ 'style', 'css', 'sass' ]
+        loaders : [ 'style', 'css', 'sass' ]
       }
     ]
   }
